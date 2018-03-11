@@ -5,10 +5,9 @@
  * @license MIT
  **/
  
-/* global $ */
+/* global $ _ */
 'use strict';
 
-let Animate = new WeakMap;
 let Client = {
   width: 'clientWidth',
   height: 'clientHeight'
@@ -19,30 +18,16 @@ let Offset = {
 };
 let Scrollbar = /^scrollbar-([xy])$/;
 let Border = /^border$/;
-let CSSProp = /^#([a-z][a-zA-Z-]*)$/;
+let CSSProp = /^#((?:--)?[a-z][a-zA-Z-]*)$/;
 
 
 $.fn.extend({ 
-  _animate: $.fn.animate,
   _width: $.fn.width,
   _height: $.fn.height,
   _offset: $.fn.offset,
   _css: $.fn.css
 });
 $.fn.extend({
-  animate(id, frames, init) {
-    return this.each((i, self) => {
-      if (!Animate.has(self)) {
-        Animate.set(self, new Map);
-      }
-      //let anim = new Animation(new KeyframeEffect(self, frames, init));
-      let anim = self.animate(frames, init);
-      anim.cancel();
-      anim.anchor = 0;
-      anim.swing = false;
-      Animate.get(self).set(id, anim);
-    });
-  },
   client(key) {
     return this.prop(Client[key]);
   },
@@ -86,6 +71,15 @@ $.fn.extend({
     if (m != null) {
       return parseFloat(this._css(m[1]));
     }
+    
+    let [fn, ...args] = rest;
+    if ($.isFunction(fn)) {
+      let val = fn.call(this, parseFloat(this._css(key)), this, ...args);
+      if (_.isFinite(val) || _.isString(val)) {
+        this._css(key, val);
+      }
+      return this;
+    }
 
     return this._css(key, ...rest);
   },
@@ -93,66 +87,31 @@ $.fn.extend({
     return this.length == 0;
   }
 });
-
-for (let key of ['play', 'reverse', 'swing']) {
-  $.fn.extend({ 
-    [key](id, cb) {
-      return this.each((i, self) => {
-        let map = Animate.get(self);
-        if (map != null) {
-          let anim = map.get(id);
-          if (anim != null) {
-            if ($.isFunction(cb)) {
-              anim.onfinish = () => {
-                if (cb.call(self, anim) === false) {
-                  anim.cancel();
-                }
-              };
-            } else {
-              anim.onfinish = null;
-            }
-
-            switch (key) {
-              case 'swing':
-                key = anim.swing ? 'reverse' : 'play';
-                anim.anchor = 1 - anim.anchor;
-                anim.swing = true;
-                break;
-              case 'play':
-                key = anim.anchor == 0 ? 'play' : 'reverse';
-                anim.anchor = 0;
-                anim.swing = false;
-                break;
-              case 'reverse':
-                key = anim.anchor == 0 ? 'reverse' : 'play';
-                anim.anchor = 1;
-                anim.swing = false;
-                break;
-            }
-            anim[key]();
-          }
-        }
-      });
-    }
-  });
-}
   
 $('header').css('--offset', $('#listing').width('scrollbar-y'));
+let theme = $('body').css('#--theme-cycle');
 $('header [name="theme"]').click(({ }) => {
   $('body').toggleClass('theme');
-});
-  
-$('#listing section').click(({ }) => {
-  $('body').addClass('article');
-  $('header').css('--offset', $('article').width('scrollbar-y'));
-  $('article').play('fade');
+  $('body').css('--theme-cycle', `${ ++theme }`);
 });
 
-$('article').animate('fade', { opacity: [0, 1] }, 
-  { duration: 300, easing: 'ease-out', fill: 'forwards' });
+  
+$('#listing section').click(({ }) => {
+  $('body').addClass('article').addClass('article-visible');
+  $('header').css('--offset', $('article').width('scrollbar-y'));
+});
+
 $('article .close').click(({ }) => {
   $('header').css('--offset', $('#listing').width('scrollbar-y'));
-  $('article').reverse('fade', () => {
-    $('body').removeClass('article');
+  // TODO: Use transition duration from CSS
+  $('article').one('transitionend', ({ }) => {
+    let self = $('article');          //let c=0;
+    let timer = setInterval(() => {
+      if (self.css('opacity') == 0) {
+        $('body').removeClass('article');
+        clearInterval(timer);         //console.log(c);
+      }                               //else c++;
+    }, 230);
   });
+  $('body').removeClass('article-visible');
 });

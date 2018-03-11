@@ -3,10 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title>Wews - Headlines</title>
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.core.min.js" as="script">
     <link rel="preload" href="index.js" as="script">
     <link rel="stylesheet" href="master.css">
-    <script async src="//use.edgefonts.net/merienda-one;rancho;norican;playball;leckerli-one;yesteryear;istok-web;cabin;puritan;carme.js"></script>
+    <!--<script async src="//use.edgefonts.net/merienda-one;rancho;norican;playball;leckerli-one;yesteryear;istok-web;cabin;puritan;carme.js"></script>-->
     <style>
       #listing section:nth-child(4n) {
         min-height: 8em;
@@ -36,7 +37,7 @@
       <form>
         <h1>Wews</h1>
         <input type="search" name="query" autofocus placeholder="search...">
-        <input type="checkbox" name="theme" title="Change theme">
+        <input type="checkbox" name="theme" title="Switch theme" data-theme="0">
       </form>
     </header>
     <article>
@@ -70,10 +71,10 @@
           <h4>Morbi venenatis tortor vel libero maximus molestie.</h4>
         </section>
         <section>
-          <h4>Morbi eget eros ac elit bibendum consectetur ac mollis urna.</h4>
+          <h4>Donec vitae urna vehicula, fringilla turpis ut, ornare lorem.</h4>
         </section>
         <section>
-          <h4>Donec vitae urna vehicula, fringilla turpis ut, ornare lorem.</h4>
+          <h4>Morbi eget eros ac elit bibendum consectetur ac mollis urna.</h4>
         </section>
         <section>
           <h4>Phasellus posuere nulla eget velit scelerisque, sit amet varius felis tincidunt.</h4>
@@ -93,7 +94,8 @@
       </nav>
     </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.core.min.js"></script>
     <script src="index.js"></script>
   </body>
 </html>
