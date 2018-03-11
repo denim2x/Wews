@@ -7,7 +7,7 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.core.min.js" as="script">
     <link rel="preload" href="index.js" as="script">
     <link rel="stylesheet" href="master.css">
-    <!--<script async src="//use.edgefonts.net/merienda-one;rancho;norican;playball;leckerli-one;yesteryear;istok-web;cabin;puritan;carme.js"></script>-->
+    
     <style>
       #listing section:nth-child(4n) {
         min-height: 8em;
@@ -31,68 +31,89 @@
         margin: 20px;
       }
     </style>
+    
   </head>
   <body class="">
-    <header>
-      <form>
-        <h1>Wews</h1>
-        <input type="search" name="query" autofocus placeholder="search...">
-        <input type="checkbox" name="theme" title="Switch theme" data-theme="0">
-      </form>
-    </header>
-    <article>
-      <div class="content">
-        <button type="button" autofocus class="close" title="Close"></button>
-        <section class="main">
-          <img src="https://goo.gl/usHM9M">
-          <p>Aliquam nec neque nec orci aliquet tempor. Maecenas et varius ipsum. Suspendisse eu justo dui. Phasellus quam magna, sagittis ac tincidunt quis, pulvinar at purus. In molestie suscipit libero luctus convallis. Donec rhoncus, nisi ac imperdiet eleifend, urna nulla malesuada nunc, quis aliquet neque lectus eget est. Donec quis semper turpis, sagittis eleifend ipsum. Vestibulum tristique, enim nec convallis pharetra, neque velit tincidunt velit, vel facilisis quam metus id mauris. Nullam sit amet ligula eleifend, bibendum neque quis, egestas sem. Mauris consectetur ante a pretium eleifend. Vivamus at ultricies ex. Curabitur dui ex, bibendum ac nunc nec, scelerisque pretium tortor. Pellentesque ac pharetra ipsum. Aliquam et nisl lobortis, porta augue vitae, finibus purus.</p>
-          <p>Quisque velit elit, varius eu luctus sit amet, pretium at ligula. Nulla euismod lobortis felis eget laoreet. Aliquam erat volutpat. Aenean auctor metus tincidunt dignissim venenatis. Aliquam nec pellentesque nisi. Suspendisse potenti. Aenean hendrerit eu ipsum nec maximus. Sed nec urna nec mauris viverra fermentum. Pellentesque quis metus ac lectus faucibus iaculis ut eget tellus.</p>
-          <p>Donec venenatis nisl sit amet dui sollicitudin, nec iaculis nisi aliquam. Duis eu dapibus magna. Proin ultrices in tortor vel mattis. Nullam gravida hendrerit cursus. Phasellus efficitur nisi ut lacus bibendum commodo. Quisque aliquet viverra velit quis gravida. Aenean vel pharetra nisl. Aenean et porttitor erat. Integer dictum euismod euismod. Donec vulputate vehicula justo vitae pharetra.</p>
-          <p>Vivamus ac vestibulum elit. Ut ut rhoncus enim, sed dignissim ante. Phasellus eu pulvinar tellus. Maecenas eget libero at purus fringilla commodo nec at nisi. Morbi eu purus non turpis luctus pellentesque et vel purus. Morbi iaculis vulputate quam, in bibendum diam molestie dapibus. In eget lorem urna. In molestie bibendum nulla, ultricies facilisis arcu aliquet ac. Cras a purus auctor, mattis eros non, placerat magna. Pellentesque eu sollicitudin dolor. Aenean rhoncus diam sit amet diam aliquet tristique. Praesent non arcu ut metus scelerisque commodo sed ac leo.</p>
-          <p>In nec magna dictum, dictum tellus eget, finibus felis. Donec metus ex, facilisis id dolor vel, blandit viverra dui. Proin vitae quam tempor, porttitor eros non, facilisis elit. Sed aliquet diam imperdiet dictum pharetra. Phasellus eleifend, ipsum nec tincidunt molestie, sem nisl faucibus eros, sit amet lacinia quam diam facilisis augue. Vivamus nec semper dui. Vestibulum facilisis ligula quis nunc elementum iaculis. Aliquam ut placerat leo. Maecenas orci lorem, rhoncus ut nibh nec, semper pharetra purus. Pellentesque vitae efficitur nunc. Cras quis imperdiet nulla. Pellentesque suscipit leo leo, consectetur blandit libero vehicula ac. Nulla a leo a felis molestie rutrum eu eu dui. Proin et ante augue. Etiam finibus vulputate metus non fringilla. Mauris laoreet dapibus quam.</p>
-        </section>
-      </div>
-    </article>
-    <main id="listing">
+    
+    <aside id="config">
+      <button type="button" class="close" title="Collapse"></button>
+      <h2>Categories</h2>
       <nav class="content">
-        <section>
-          <h4>Aliquam laoreet tellus et porta faucibus.</h4>
-        </section>
-        <section>
-          <h4>In sodales diam sed lectus blandit, ut tristique arcu faucibus.</h4>
-        </section>
-        <section>
-          <h4>Phasellus at tortor bibendum, scelerisque purus sed, vestibulum tellus.</h4>
-        </section>
-        <section>
-          <h4>Ut non ante quis velit maximus aliquet.</h4>
-        </section>
-        <section>
-          <h4>Morbi venenatis tortor vel libero maximus molestie.</h4>
-        </section>
-        <section>
-          <h4>Donec vitae urna vehicula, fringilla turpis ut, ornare lorem.</h4>
-        </section>
-        <section>
-          <h4>Morbi eget eros ac elit bibendum consectetur ac mollis urna.</h4>
-        </section>
-        <section>
-          <h4>Phasellus posuere nulla eget velit scelerisque, sit amet varius felis tincidunt.</h4>
-        </section>
-        <section>
-          <h4>Praesent iaculis enim sit amet justo eleifend, et elementum risus aliquet.</h4>
-        </section>
-        <section>
-          <h4>Integer iaculis elit vel viverra vehicula.</h4>
-        </section>
-        <section>
-          <h4>Mauris eu nibh fermentum, scelerisque eros quis, aliquam massa.</h4>
-        </section>
-        <section>
-          <h4>In mollis urna sit amet viverra fringilla.</h4>
-        </section>
+        <button type="button">Everything</button>
+        <button type="button">Sports</button>
+        <button type="button">Politics</button>
+        <button type="button">World</button>
+        <button type="button">Weather</button>
+        <button type="button">Technology</button>
+        <button type="button">Entertainment</button>
       </nav>
-    </main>
+    </aside>
+    
+    <div id="main">
+      <header>
+        <form>
+          <input type="checkbox" name="config" title="Expand">
+          <h1>Wews</h1>
+          <input type="search" name="query" autofocus placeholder="search...">
+          <input type="checkbox" name="theme" title="Switch theme">
+        </form>
+      </header>
+      
+      <article>
+        <div class="content">
+          <button type="button" class="close" title="Close"></button>
+          <section class="main">
+            <img src="https://goo.gl/usHM9M">
+            <p>Aliquam nec neque nec orci aliquet tempor. Maecenas et varius ipsum. Suspendisse eu justo dui. Phasellus quam magna, sagittis ac tincidunt quis, pulvinar at purus. In molestie suscipit libero luctus convallis. Donec rhoncus, nisi ac imperdiet eleifend, urna nulla malesuada nunc, quis aliquet neque lectus eget est. Donec quis semper turpis, sagittis eleifend ipsum. Vestibulum tristique, enim nec convallis pharetra, neque velit tincidunt velit, vel facilisis quam metus id mauris. Nullam sit amet ligula eleifend, bibendum neque quis, egestas sem. Mauris consectetur ante a pretium eleifend. Vivamus at ultricies ex. Curabitur dui ex, bibendum ac nunc nec, scelerisque pretium tortor. Pellentesque ac pharetra ipsum. Aliquam et nisl lobortis, porta augue vitae, finibus purus.</p>
+            <p>Quisque velit elit, varius eu luctus sit amet, pretium at ligula. Nulla euismod lobortis felis eget laoreet. Aliquam erat volutpat. Aenean auctor metus tincidunt dignissim venenatis. Aliquam nec pellentesque nisi. Suspendisse potenti. Aenean hendrerit eu ipsum nec maximus. Sed nec urna nec mauris viverra fermentum. Pellentesque quis metus ac lectus faucibus iaculis ut eget tellus.</p>
+            <p>Donec venenatis nisl sit amet dui sollicitudin, nec iaculis nisi aliquam. Duis eu dapibus magna. Proin ultrices in tortor vel mattis. Nullam gravida hendrerit cursus. Phasellus efficitur nisi ut lacus bibendum commodo. Quisque aliquet viverra velit quis gravida. Aenean vel pharetra nisl. Aenean et porttitor erat. Integer dictum euismod euismod. Donec vulputate vehicula justo vitae pharetra.</p>
+            <p>Vivamus ac vestibulum elit. Ut ut rhoncus enim, sed dignissim ante. Phasellus eu pulvinar tellus. Maecenas eget libero at purus fringilla commodo nec at nisi. Morbi eu purus non turpis luctus pellentesque et vel purus. Morbi iaculis vulputate quam, in bibendum diam molestie dapibus. In eget lorem urna. In molestie bibendum nulla, ultricies facilisis arcu aliquet ac. Cras a purus auctor, mattis eros non, placerat magna. Pellentesque eu sollicitudin dolor. Aenean rhoncus diam sit amet diam aliquet tristique. Praesent non arcu ut metus scelerisque commodo sed ac leo.</p>
+            <p>In nec magna dictum, dictum tellus eget, finibus felis. Donec metus ex, facilisis id dolor vel, blandit viverra dui. Proin vitae quam tempor, porttitor eros non, facilisis elit. Sed aliquet diam imperdiet dictum pharetra. Phasellus eleifend, ipsum nec tincidunt molestie, sem nisl faucibus eros, sit amet lacinia quam diam facilisis augue. Vivamus nec semper dui. Vestibulum facilisis ligula quis nunc elementum iaculis. Aliquam ut placerat leo. Maecenas orci lorem, rhoncus ut nibh nec, semper pharetra purus. Pellentesque vitae efficitur nunc. Cras quis imperdiet nulla. Pellentesque suscipit leo leo, consectetur blandit libero vehicula ac. Nulla a leo a felis molestie rutrum eu eu dui. Proin et ante augue. Etiam finibus vulputate metus non fringilla. Mauris laoreet dapibus quam.</p>
+          </section>
+        </div>
+      </article>
+      
+      <main id="listing">
+        <nav class="content">
+          <section>
+            <h4>Aliquam laoreet tellus et porta faucibus.</h4>
+          </section>
+          <section>
+            <h4>In sodales diam sed lectus blandit, ut tristique arcu faucibus.</h4>
+          </section>
+          <section>
+            <h4>Phasellus at tortor bibendum, scelerisque purus sed, vestibulum tellus.</h4>
+          </section>
+          <section>
+            <h4>Ut non ante quis velit maximus aliquet.</h4>
+          </section>
+          <section>
+            <h4>Morbi venenatis tortor vel libero maximus molestie.</h4>
+          </section>
+          <section>
+            <h4>Donec vitae urna vehicula, fringilla turpis ut, ornare lorem.</h4>
+          </section>
+          <section>
+            <h4>Morbi eget eros ac elit bibendum consectetur ac mollis urna.</h4>
+          </section>
+          <section>
+            <h4>Phasellus posuere nulla eget velit scelerisque, sit amet varius felis tincidunt.</h4>
+          </section>
+          <section>
+            <h4>Praesent iaculis enim sit amet justo eleifend, et elementum risus aliquet.</h4>
+          </section>
+          <section>
+            <h4>Integer iaculis elit vel viverra vehicula.</h4>
+          </section>
+          <section>
+            <h4>Mauris eu nibh fermentum, scelerisque eros quis, aliquam massa.</h4>
+          </section>
+          <section>
+            <h4>In mollis urna sit amet viverra fringilla.</h4>
+          </section>
+        </nav>
+      </main>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.core.min.js"></script>

@@ -73,7 +73,7 @@ $.fn.extend({
     }
     
     let [fn, ...args] = rest;
-    if ($.isFunction(fn)) {
+    if (_.isFunction(fn)) {
       let val = fn.call(this, parseFloat(this._css(key)), this, ...args);
       if (_.isFinite(val) || _.isString(val)) {
         this._css(key, val);
@@ -87,17 +87,26 @@ $.fn.extend({
     return this.length == 0;
   }
 });
+
+$('#config .close').click(({ }) => {
+  $('body').removeClass('config');
+})
   
 $('header').css('--offset', $('#listing').width('scrollbar-y'));
-let theme = $('body').css('#--theme-cycle');
+
+$('header [name="config"]').click(({ }) => {
+  $('body').addClass('config');
+});
+
+let theme = $('#main').css('#--theme-cycle');
 $('header [name="theme"]').click(({ }) => {
-  $('body').toggleClass('theme');
-  $('body').css('--theme-cycle', `${ ++theme }`);
+  $('#main').toggleClass('theme');
+  $('#main').css('--theme-cycle', `${ ++theme }`);
 });
 
   
 $('#listing section').click(({ }) => {
-  $('body').addClass('article').addClass('article-visible');
+  $('#main').addClass('article').addClass('article-visible');
   $('header').css('--offset', $('article').width('scrollbar-y'));
 });
 
@@ -108,10 +117,10 @@ $('article .close').click(({ }) => {
     let self = $('article');          //let c=0;
     let timer = setInterval(() => {
       if (self.css('opacity') == 0) {
-        $('body').removeClass('article');
+        $('#main').removeClass('article');
         clearInterval(timer);         //console.log(c);
       }                               //else c++;
     }, 230);
   });
-  $('body').removeClass('article-visible');
+  $('#main').removeClass('article-visible');
 });
