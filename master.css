@@ -17,43 +17,32 @@ html, body {
   margin: 0;
 }
 
-body {
-  font-family: 'Cabin', sans-serif;
-  display: grid;
-  grid-template-columns: auto 1fr;
-}
-
 body, #main {
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
 }
 
+body {
+  font-family: 'Cabin', sans-serif;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  --config: 0;
+}
+
 body.config {
   --config-width: 11.83em;
+  --config: 1;
 }
 
-body.config #config .close {
-  transition:
-    opacity 0.2s ease-in;
-    
-  opacity: 0.25;
-}
-
-body.config header [name="config"] {
-  width: 0;
-}
-
-input, [type="button"] {
+[type] {
   background: no-repeat center/100%;
+  font-family: inherit;
 }
 
 [type="button"] {
-  text-transform: uppercase;
   cursor: pointer;
   border: none;
-  font-weight: 700;
-  font-family: inherit;
 }
 
 [type="button"]:focus {
@@ -70,48 +59,83 @@ input, [type="button"] {
   /*background: hsl(0, 0%, 63%);*/
   background: hsl(0, 0%, 58%);
   position: relative;
+  height: 100vh;
+  box-sizing: border-box;
 }
 
-#config .close {
+#config [name="close"] {
   transition:
-    opacity 0.4s ease-out;
+    opacity 0.2 ease-in;
     
-  opacity: 0;
+  /*opacity: calc(0.25 * var(--config));*/
+  opacity: 0.33;
     
-  width: 19px;
-  height: 19px;
-  background-image: url("https://image.flaticon.com/icons/svg/25/25705.svg");
+  width: 12px;
+  height: 12px;
+  /*background-image: url("https://image.flaticon.com/icons/svg/25/25705.svg");*/
+  background-image: url("https://image.flaticon.com/icons/svg/70/70429.svg");
   position: absolute;
-  right: 0.85em;
-  top: 1.195em;
+  /*right: 0.85em;*/
+  left: 0.13em;
+  /*top: 1.195em;*/
+  top: 1.35em;
+  z-index: 1;
 }
 
-#config .close:hover {
-  opacity: 0.35 !important;
+#config [name="close"]:hover {
+  opacity: 0.4 !important;
 }
 
-#config .close:active {
-  opacity: 0.25 !important;
+#config [name="close"]:active {
+  opacity: 0.5 !important;
 }
 
-#config h2 {
-  font-weight: 400;
-  /*color: hsl(0, 0%, 36%);*/
-  color: hsl(0, 0%, 36%);
-  /*font-size: 1.18em;*/
-  font-size: 1.16em;
-  /*margin: 1.7em 0 0.02em 1.15em;*/
-  /*margin: 2em 0 0.30em 1.10em;*/
-  margin: 0.95em 0 0.30em 0.80em;
+#config .content, #config fieldset {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+#config fieldset {
+  margin-top: 0.8em;
 }
 
 #config .content {
   color: hsl(0, 0%, 95%);
   /*padding: 2.6em 2.2em;*/
-  padding: 0 1.65em;
+  overflow-y: auto;
+  display: block;
+  height: 100%;
+  width: 100%;
+  padding-top: 0.21em;
 }
 
-#config .content [type="button"] {
+#config legend {
+  font-weight: 400;
+  /*color: hsl(0, 0%, 36%);*/
+  color: hsl(0, 0%, 36%);
+  /*font-size: 1.18em;*/
+  font-size: 1.16em;
+  padding: 0;
+  /*margin: 1.7em 0 0.02em 1.15em;*/
+  /*margin: 2em 0 0.30em 1.10em;*/
+  /*margin: 0.95em 0 0.30em 0.80em;*/
+  margin: 0 0 0.15em 0.80em;
+  position: relative;
+  display: block;
+  text-align: left;
+}
+
+#config [type] {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+#config .content [type] {
   transition:
     color 0.1s ease-in;
     
@@ -119,24 +143,49 @@ input, [type="button"] {
   color: inherit;
   /*height: 2.95em;*/
   /*height: 2.55em;*/
-  height: 2.43em;
+  /*height: 2.43em;*/
+  height: 1.76em;
   font-size: 0.75em;
+  position: relative;
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  cursor: pointer;
+  margin: 0 0 0 1.65em;
+  padding: 1px 6px;
   /*font-size: 0.76em;*/
 }
 
-#config .content [type="button"]:hover {
+#config .content [type]:hover {
   color: hsl(0, 0%, 100%);
 }
 
+#config .content [value] {
+  padding: 5px 6px 0 6px;
+}
+
+#config [value]:before {
+  content: attr(value);
+  font: inherit;
+  height: inherit;
+  position: inherit;
+  display: inherit;
+  padding: 0;
+  /*margin-left: calc(1.65em*0.3);*/
+  text-align: center;
+  /*color: inherit;*/
+  /*text-transform: inherit;*/
+}
+
 #main {
-  width: 100%;
-  height: 100%;
   transition: 
     background-color 0.25s ease-in;
     
+  background: hsl(0, 0%, calc(82% + (20% - 82%) * var(--theme)));
+    
   --theme: 0;
   --theme-cycle: 0;
-  background: hsl(0, 0%, calc(82% + (20% - 82%) * var(--theme)));
+  width: 100%;
+  height: 100vh;
 }
 
 #main.article article {
@@ -193,22 +242,17 @@ header input:focus {
   outline: none;
 }
 
-header [type="checkbox"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  cursor: pointer;
-}
-
 header [name="config"] {
   transition:
     width 0.4s ease-out;
     
   background-image: url("https://image.flaticon.com/icons/svg/54/54175.svg");
-  width: 1.35em;
-  height: 1.35em;
-  margin-top: 1.15em;
-  margin-left: 0.75em;
+  width: calc(1.00em * (1 - var(--config)));
+  height: 1.00em;
+  margin-top: 1.25em;
+  margin-left: 0.2em;
   opacity: 0.64;
+  grid-column: 1;
 }
 
 header h1 {
@@ -233,6 +277,12 @@ header [name="query"] {
   overflow: hidden;
   height: 100%;
   grid-column: 3;
+}
+
+header [type="checkbox"] {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  cursor: pointer;
 }
 
 header [name="theme"] {
@@ -316,7 +366,7 @@ article {
   z-index: 1;
 }
 
-article .close {
+article [name="close"] {
   transition:
     opacity 0.2s ease-in;
     
@@ -332,11 +382,11 @@ article .close {
   background: no-repeat url("https://image.flaticon.com/icons/svg/128/128531.svg");
 }
 
-article .close:hover {
+article [name="close"]:hover {
   opacity: 0.43;
 }
 
-article .close:active {
+article [name="close"]:active {
   opacity: 0.53;
 }
 

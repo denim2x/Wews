@@ -36,23 +36,55 @@
   <body class="">
     
     <aside id="config">
-      <button type="button" class="close" title="Collapse"></button>
-      <h2>Categories</h2>
-      <nav class="content">
-        <button type="button">Everything</button>
-        <button type="button">Sports</button>
-        <button type="button">Politics</button>
-        <button type="button">World</button>
-        <button type="button">Weather</button>
-        <button type="button">Technology</button>
-        <button type="button">Entertainment</button>
-      </nav>
+      <button type="button" name="close" title="Collapse"></button>
+      
+      <form class="content">
+        <fieldset name="categories">
+          <legend>Categories</legend>
+          <button type="button">Everything</button>
+          <button type="button">Sports</button>
+          <button type="button">Politics</button>
+          <button type="button">World</button>
+          <button type="button">Weather</button>
+          <button type="button">Technology</button>
+          <button type="button">Entertainment</button>
+        </fieldset>
+        
+        <fieldset name="order">
+          <legend>Sort by</legend>
+          <input type="radio" name="order" value="Relevance">
+          <input type="radio" name="order" value="Trending">
+          <input type="radio" name="order" value="Latest">
+        </fieldset>
+        
+        <fieldset name="timespan">
+          <legend>Interval</legend>
+          <input type="radio" name="timespan" value="Last day">
+          <input type="radio" name="timespan" value="Last week">
+          <input type="radio" name="timespan" value="Last month">
+          <input type="radio" name="timespan" value="Last three months">
+          <input type="radio" name="timespan" value="Last year">
+          <input type="radio" name="timespan" value="Last five years">
+          <input type="radio" name="timespan" value="All time">
+        </fieldset>
+        
+        <fieldset name="sources">
+          <legend>Sources</legend>
+          <input type="checkbox" value="BBC">
+          <input type="checkbox" value="Yahoo">
+          <input type="checkbox" value="Google">
+          <input type="checkbox" value="Bing">
+          <input type="checkbox" value="NBC">
+          <input type="checkbox" value="MSN">
+          <input type="checkbox" value="Express">
+        </fieldset>
+      </form>
     </aside>
     
     <div id="main">
       <header>
         <form>
-          <input type="checkbox" name="config" title="Expand">
+          <input type="button" name="config" title="Open settings">
           <h1>Wews</h1>
           <input type="search" name="query" autofocus placeholder="search...">
           <input type="checkbox" name="theme" title="Switch theme">
@@ -61,7 +93,7 @@
       
       <article>
         <div class="content">
-          <button type="button" class="close" title="Close"></button>
+          <button type="button" name="close" title="Close"></button>
           <section class="main">
             <img src="https://goo.gl/usHM9M">
             <p>Aliquam nec neque nec orci aliquet tempor. Maecenas et varius ipsum. Suspendisse eu justo dui. Phasellus quam magna, sagittis ac tincidunt quis, pulvinar at purus. In molestie suscipit libero luctus convallis. Donec rhoncus, nisi ac imperdiet eleifend, urna nulla malesuada nunc, quis aliquet neque lectus eget est. Donec quis semper turpis, sagittis eleifend ipsum. Vestibulum tristique, enim nec convallis pharetra, neque velit tincidunt velit, vel facilisis quam metus id mauris. Nullam sit amet ligula eleifend, bibendum neque quis, egestas sem. Mauris consectetur ante a pretium eleifend. Vivamus at ultricies ex. Curabitur dui ex, bibendum ac nunc nec, scelerisque pretium tortor. Pellentesque ac pharetra ipsum. Aliquam et nisl lobortis, porta augue vitae, finibus purus.</p>

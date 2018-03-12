@@ -88,7 +88,7 @@ $.fn.extend({
   }
 });
 
-$('#config .close').click(({ }) => {
+$('#config [name="close"]').click(({ }) => {
   $('body').removeClass('config');
 })
   
@@ -110,7 +110,7 @@ $('#listing section').click(({ }) => {
   $('header').css('--offset', $('article').width('scrollbar-y'));
 });
 
-$('article .close').click(({ }) => {
+$('article [name="close"]').click(({ }) => {
   $('header').css('--offset', $('#listing').width('scrollbar-y'));
   // TODO: Use transition duration from CSS
   $('article').one('transitionend', ({ }) => {
