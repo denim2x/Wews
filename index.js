@@ -25,7 +25,8 @@ $.fn.extend({
   _width: $.fn.width,
   _height: $.fn.height,
   _offset: $.fn.offset,
-  _css: $.fn.css
+  _css: $.fn.css,
+  _toggleClass: $.fn.toggleClass
 });
 $.fn.extend({
   client(key) {
@@ -85,6 +86,16 @@ $.fn.extend({
   },
   none() {
     return this.length == 0;
+  },
+  toggleClass(value, cb=_.noop) {
+    if (this.hasClass(value)) {
+      this.removeClass(value);
+      cb.call(this, false);
+    } else {
+      this.addClass(value);
+      cb.call(this, true);
+    }
+    return this;
   }
 });
 
@@ -94,8 +105,10 @@ $('#config [name="close"]').click(({ }) => {
   
 $('header').css('--offset', $('#listing').width('scrollbar-y'));
 
-$('header [name="config"]').click(({ }) => {
-  $('body').addClass('config');
+$('header h1').click(({ }) => {
+  $('body').toggleClass('config', (on) => {
+    $('header h1').attr('title', `${ on ? 'Close' : 'Open' } settings`);
+  });
 });
 
 let theme = $('#main').css('#--theme-cycle');
