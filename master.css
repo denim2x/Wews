@@ -75,7 +75,7 @@ body.config {
   background-color: hsl(0, 0%, 54%);
     
   width: 100%;
-  height: 100%;
+  height: 100vh;
   /*background-image: url("https://image.flaticon.com/icons/svg/25/25705.svg");*/
   position: relative;
   grid-column: 2;
@@ -113,8 +113,8 @@ body.config {
   /*padding: 2.6em 2.2em;*/
   overflow-y: auto;
   display: block;
-  height: 100%;
   width: 100%;
+  height: 100vh;
   padding-top: 0.21em;
   padding-bottom: 1em;
   grid-column: 1;
@@ -183,6 +183,7 @@ body.config {
   padding: 0;
   /*margin-left: calc(1.65em*0.3);*/
   text-align: center;
+  background: none;
   /*color: inherit;*/
   /*text-transform: inherit;*/
 }
@@ -231,7 +232,7 @@ header {
   box-sizing: border-box;
 }
 
-header form {
+header .content {
   display: grid;
   grid-template-columns: auto 1fr auto/*2em*/ /*1.35em*/;
   width: 100%;
@@ -240,7 +241,7 @@ header form {
   pointer-events: initial;
 }
 
-header input {
+header [type] {
   border: none;
   margin: 0;
   position: relative;
@@ -248,11 +249,11 @@ header input {
   box-sizing: border-box;
 }
 
-header input:focus {
+header [type]:focus {
   border: none;
   outline: none;
 }
-
+/*
 header [name="config"] {
   transition:
     width 0.4s ease-out;
@@ -264,7 +265,7 @@ header [name="config"] {
   margin-left: 0.2em;
   opacity: 0.64;
 }
-
+*/
 header h1 {
   transition:
     color 0.2s ease-out;
@@ -305,7 +306,7 @@ body.config header h1:before {
 }
 
 body.config header h1:hover:before {
-   opacity: 0.7;
+  opacity: 0.7;
 }
 
 header h1:hover:before {
@@ -313,6 +314,11 @@ header h1:hover:before {
 }
 
 header [name="query"] {
+  transition:
+    opacity 0.2s ease-in;
+    
+  opacity: 0.7;
+  
   background: none;
   font-family: inherit;
   font-size: 1.4em;
@@ -325,6 +331,10 @@ header [name="query"] {
   grid-column: 2;
 }
 
+header [name="query"]:focus {
+  opacity: 1;
+}
+
 header [type="checkbox"] {
   -webkit-appearance: button;
   -moz-appearance: button;
@@ -333,17 +343,26 @@ header [type="checkbox"] {
 
 header [name="theme"] {
   transition: 
-    transform 0.41s ease-out;
+    transform 0.41s ease-out,
+    opacity 0.2s ease-in;
     
   transform: rotateZ(calc(180deg * var(--theme-cycle)));
+  opacity: 0.57;
   
   background-image: url("https://image.flaticon.com/icons/svg/25/25636.svg");
   margin-top: 1.15em;
   margin-right: 0.65em;
   width: 1.35em;
   height: 1.35em;
-  opacity: 0.73;
   grid-column: 3;
+}
+
+header [name="theme"]:hover {
+  opacity: 0.73;
+}
+
+header [name="theme"]:active {
+  opacity: 0.91;
 }
 
 #listing {
@@ -463,8 +482,8 @@ article .main {
 article p {
   margin: 0 0 0.7em 0;
 }
-/* TODO: Normalize query breakpoints */
 
+/* TODO: Normalize breakpoints */
 @media screen and (min-width: 600px) {
   #listing > .content {
     column-count: 2;

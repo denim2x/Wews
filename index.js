@@ -19,7 +19,15 @@ let Offset = {
 let Scrollbar = /^scrollbar-([xy])$/;
 let Border = /^border$/;
 let CSSProp = /^#((?:--)?[a-z][a-zA-Z-]*)$/;
+let Local = {
+  name: 'localName'
+};
 
+$.extend({
+  active() {
+    return $(document.activeElement);
+  }
+});
 
 $.fn.extend({ 
   _width: $.fn.width,
@@ -96,8 +104,36 @@ $.fn.extend({
       cb.call(this, true);
     }
     return this;
+  },
+  local(key) {
+    return this.prop(Local[key] || key);
+  },
+  type() {
+    return this.attr('type');
+  },
+  name() {
+    return this.attr('name');
+  },
+  has(spec) {
+    return Object.entries(spec).every(([k, v]) => this[k]() == v);
   }
 });
+
+$('#main [name="query"]')
+  .on('blur', () => {
+    $('body').on('keydown.search', ({ ctrlKey: c, altKey: a, shiftKey: s, which }) => {
+      if ((which > 64 && which < 91 || which == 32) && !c && !a) {
+        $('body').off('keydown.search');
+        $('#main [name="query"]').focus();
+      }
+    });
+  })
+  .on('keydown', ({ ctrlKey: c, altKey: a, shiftKey: s, which }) => {
+    if (which == 27) {
+      $('#main [name="query"]').blur();
+      return false;
+    }
+  });
 
 $('#config [name="close"]').click(({ }) => {
   $('body').removeClass('config');
