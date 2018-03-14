@@ -2,12 +2,12 @@
 
 :root {
   /* Variable declarations */
-  --listing-gap: 0.44em;
-  --header-height: 2.92em;
-  --article-padding: 0.5em;
-  --listing-padding: 0.5em;
+  --Header-height: 2.92em;
+  --Article-padding: 0.5em;
+  --Config-width: 0em;
+  --Catalog-width: 350px;
+  --Catalog-padding: 0.5em;
   --min-width: 300px;
-  --config-width: 0em;
 }
 
 html, body {
@@ -17,22 +17,25 @@ html, body {
   margin: 0;
 }
 
-body, #main {
+.Root, .Root-body {
   box-sizing: border-box;
   overflow: hidden;
-  position: relative;
 }
 
-body {
+.Root {
   font-family: 'Cabin', sans-serif;
   display: grid;
   grid-template-columns: auto 1fr;
   --config: 0;
 }
 
-body.config {
+.Root.is-config {
   --config-width: 11.83em;
   --config: 1;
+}
+
+.Root.is-dark {
+  --theme: 1;
 }
 
 [type] {
@@ -40,21 +43,41 @@ body.config {
   font-family: inherit;
 }
 
-[type="button"] {
-  cursor: pointer;
-  border: none;
-}
-
-[type="button"]:focus {
+[type]:focus {
   border: none;
   outline: none;
 }
- 
-#config {
+
+[type="button"] {
+  border: none;
+  cursor: pointer;
+}
+
+.u-button {
+  cursor: pointer;
+  -moz-appearance: button;
+  -webkit-appearance: button;
+}
+
+.u-value [value]:before {
+  padding: 0;
+  background: none;
+  content: attr(value);
+  
+  font: inherit;
+  color: inherit;
+  height: inherit;
+  display: inherit;
+  position: inherit;
+  text-align: inherit;
+  text-transform: inherit;
+}
+
+.Config {
   transition:
     width 0.2s ease-out;
     
-  width: var(--config-width);
+  width: var(--Config-width);
   /*width: 12.3em;*/
   /*background: hsl(0, 0%, 63%);*/
   background: hsl(0, 0%, 58%);
@@ -65,7 +88,7 @@ body.config {
   grid-template-columns: 1fr 0.545em;
 }
 
-#config [name="close"] {
+.Config-close {
   transition:
     background-color 0.2s ease-in;
     
@@ -88,17 +111,22 @@ body.config {
   /*z-index: 1;*/
 }
 
-#config [name="close"]:hover {
+.Config-close:hover {
   /*opacity: 0.4 !important;*/
   background-color: hsl(0, 0%, 52%);
 }
 
-#config [name="close"]:active {
+.Config-close:active {
   /*opacity: 0.5 !important;*/
   background-color: hsl(0, 0%, 50%);
 }
 
-#config .content, #config fieldset {
+.Config [type] {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.Config-body, .Config fieldset {
   border: none;
   outline: none;
   background: none;
@@ -108,7 +136,7 @@ body.config {
   position: relative;
 }
 
-#config .content {
+.Config-body {
   color: hsl(0, 0%, 95%);
   /*padding: 2.6em 2.2em;*/
   overflow-y: auto;
@@ -121,11 +149,11 @@ body.config {
   grid-row: 1;
 }
 
-#config fieldset {
+.Config-body fieldset {
   margin-top: 0.8em;
 }
 
-#config legend {
+.Config-body legend {
   font-weight: 400;
   /*color: hsl(0, 0%, 36%);*/
   color: hsl(0, 0%, 36%);
@@ -141,12 +169,7 @@ body.config {
   text-align: left;
 }
 
-#config [type] {
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-#config .content [type] {
+.Config-body [type] {
   transition:
     color 0.1s ease-in;
     
@@ -166,29 +189,16 @@ body.config {
   /*font-size: 0.76em;*/
 }
 
-#config .content [type]:hover {
+.Config-body [type]:hover {
   color: hsl(0, 0%, 100%);
 }
 
-#config .content [value] {
+.Config-body [value] {
   padding: 5px 6px 0 6px;
-}
-
-#config [value]:before {
-  content: attr(value);
-  font: inherit;
-  height: inherit;
-  position: inherit;
-  display: inherit;
-  padding: 0;
-  /*margin-left: calc(1.65em*0.3);*/
   text-align: center;
-  background: none;
-  /*color: inherit;*/
-  /*text-transform: inherit;*/
 }
 
-#main {
+.Root-body{
   transition: 
     background-color 0.25s ease-in;
     
@@ -200,28 +210,24 @@ body.config {
   height: 100vh;
 }
 
-#main.article article {
+.Article.is-enabled {
   visibility: visible;
 }
 
-#main.article-visible article {
+.Article.is-visible {
   opacity: 1;
 }
 
-#main.theme {
-  --theme: 1;
-}
-
-header {
+.Header {
   transition: 
     width 0.2s ease-out,
     filter 0.25s ease-in;
     
   --offset: 0px;
-  width: calc(100% - var(--offset) - var(--config-width));
+  width: calc(100% - var(--offset) - var(--Config-width));
   filter: invert(calc(63% * var(--theme)));
   
-  height: var(--header-height);
+  height: var(--Header-height);
   position: fixed;
   top: 0;
   background: hsl(0, 0%, 99%);
@@ -232,7 +238,7 @@ header {
   box-sizing: border-box;
 }
 
-header .content {
+.Header-root {
   display: grid;
   grid-template-columns: auto 1fr auto/*2em*/ /*1.35em*/;
   width: 100%;
@@ -241,7 +247,7 @@ header .content {
   pointer-events: initial;
 }
 
-header [type] {
+.Header-root [type] {
   border: none;
   margin: 0;
   position: relative;
@@ -249,12 +255,12 @@ header [type] {
   box-sizing: border-box;
 }
 
-header [type]:focus {
+.Header-root [type]:focus {
   border: none;
   outline: none;
 }
 /*
-header [name="config"] {
+.Header [name="config"] {
   transition:
     width 0.4s ease-out;
     
@@ -266,7 +272,7 @@ header [name="config"] {
   opacity: 0.64;
 }
 */
-header h1 {
+.Header-logo {
   transition:
     color 0.2s ease-out;
     
@@ -281,11 +287,11 @@ header h1 {
   grid-column: 1;
 }
 
-header h1:hover {
+.Header-logo:hover {
   color: transparent;
 }
 
-header h1:before {
+.Header-logo:before {
   transition:
     opacity 0.2s ease-in;
     
@@ -301,19 +307,19 @@ header h1:before {
   background: no-repeat center 60%/72% url("https://image.flaticon.com/icons/svg/54/54175.svg");
 }
 
-body.config header h1:before {
-  background: no-repeat center 20%/35% url("https://image.flaticon.com/icons/svg/159/159097.svg");
-}
-
-body.config header h1:hover:before {
-  opacity: 0.7;
-}
-
-header h1:hover:before {
+.Header-logo:hover:before {
   opacity: 0.85;
 }
 
-header [name="query"] {
+body.config .Header-logo:before {
+  background: no-repeat center 20%/35% url("https://image.flaticon.com/icons/svg/159/159097.svg");
+}
+
+body.config .Header-logo:hover:before {
+  opacity: 0.7;
+}
+
+.Header-search {
   transition:
     opacity 0.2s ease-in;
     
@@ -331,17 +337,11 @@ header [name="query"] {
   grid-column: 2;
 }
 
-header [name="query"]:focus {
+.Header-search:focus {
   opacity: 1;
 }
 
-header [type="checkbox"] {
-  -webkit-appearance: button;
-  -moz-appearance: button;
-  cursor: pointer;
-}
-
-header [name="theme"] {
+.Header-themes {
   transition: 
     transform 0.41s ease-out,
     opacity 0.2s ease-in;
@@ -357,35 +357,40 @@ header [name="theme"] {
   grid-column: 3;
 }
 
-header [name="theme"]:hover {
+.Header-themes:hover {
   opacity: 0.73;
 }
 
-header [name="theme"]:active {
+.Header-themes:active {
   opacity: 0.91;
 }
 
-#listing {
+.Catalog {
+  --columns: 1;
+  --column-gap: 0.44em;
   width: 100%;
   height: 100%;
   display: block;
   overflow: auto;
   box-sizing: border-box;
   position: relative;
-  padding: calc(var(--header-height) + var(--listing-padding)) var(--listing-padding) var(--listing-padding) var(--listing-padding);
+  padding: calc(var(--Header-height) + var(--Catalog-padding)) var(--Catalog-padding) var(--Catalog-padding) var(--Catalog-padding);
 }
 
-#listing > .content {
-  column-gap: var(--listing-gap);
-  column-fill: balance;
+.Catalog-root {
+  /*column-gap: var(--listing-gap);*/
+  /*column-fill: balance;*/
+  display: flex;
   position: relative;
-  max-width: 350px;
+  width: 100%;
+  /*max-width: 350px;*/
+  max-width: var(--Catalog-width);
   margin: 0 auto;
   box-sizing: border-box;
   min-width: var(--min-width);
 }
 
-#listing section {
+.Catalog-root section {
   transition: 
     background-color 0.41s ease-out, 
     color 0.25s ease-in, 
@@ -396,19 +401,18 @@ header [name="theme"]:active {
   opacity: 0.8;
   
   display: inline-block;
-  margin: 0 0 var(--listing-gap) 0;
-  width: 100%;
+  position: relative;
+  vertical-align: top;
   cursor: pointer;
   padding: 0.6em;
   box-sizing: border-box;
 }
 
-#listing section:hover {
+.Catalog-root section:hover {
   opacity: 1;
-  /*background: hsl(0, 0%, 100%);*/
 }
 
-#listing h4 {
+.Catalog-root h4 {
   font-weight: 400;
   font-size: 1.21em;
   line-height: 1.25;
@@ -416,7 +420,7 @@ header [name="theme"]:active {
   color: inherit;
 }
 
-article {
+.Article {
   transition: opacity 0.41s ease-out;
   opacity: 0;
   
@@ -424,14 +428,14 @@ article {
   position: absolute;
   width: 100%;
   height: 100%;
-  padding: calc(var(--header-height) + var(--article-padding)) var(--article-padding) var(--article-padding) var(--article-padding);
+  padding: calc(var(--.Header-height) + var(--.Article-padding)) var(--.Article-padding) var(--.Article-padding) var(--.Article-padding);
   box-sizing: border-box;
   background: hsla(0, 0%, 55%, 0.975);
   overflow: auto;
   z-index: 1;
 }
 
-article [name="close"] {
+.Article-close {
   transition:
     opacity 0.2s ease-in;
     
@@ -441,21 +445,21 @@ article [name="close"] {
   height: 23px;
   z-index: 1;
   position: sticky;
-  margin: var(--article-padding) 0.5em;
+  margin: var(--.Article-padding) 0.5em;
   float: right;
-  top: calc(var(--article-padding));
+  top: calc(var(--.Article-padding));
   background: no-repeat url("https://image.flaticon.com/icons/svg/128/128531.svg");
 }
 
-article [name="close"]:hover {
+.Article-close:hover {
   opacity: 0.43;
 }
 
-article [name="close"]:active {
+.Article-close:active {
   opacity: 0.53;
 }
 
-article > .content {
+.Article-root {
   transition: 
     background-color 0.41s ease-out, 
     color 0.25s ease-in;
@@ -475,39 +479,55 @@ article > .content {
   min-width: var(--min-width);
 }
 
-article .main {
+.Article-body {
   padding: 1.0em;
 }
 
-article p {
+.Article-body p {
   margin: 0 0 0.7em 0;
 }
 
 /* TODO: Normalize breakpoints */
 @media screen and (min-width: 600px) {
-  #listing > .content {
+  .Catalog {
+    --columns: 2;
+    --Catalog-width: 670px;
+  } /*
+  .Catalog-root {
     column-count: 2;
     max-width: 670px;
-  }
+  }  */
 }
 
 @media screen and (min-width: 830px) {
-  #listing > .content {
+  .Catalog {
+    --columns: 3;
+    --Catalog-width: 950px;
+  } /*
+  .Catalog-root {
     column-count: 3;
     max-width: 950px;
-  }
+  }  */
 }
 
 @media screen and (min-width: 1080px) {
-  #listing > .content {
+  .Catalog {
+    --columns: 4;
+    --Catalog-width: 1250px;
+  } /*
+  .Catalog-root {
     column-count: 4;
     max-width: 1250px;
-  }
+  }  */
 }
 /* Calculated through interpolation */
 @media screen and (min-width: 1450px) {
-  #listing > .content {
+  .Catalog {
+    --columns: 5;
+    --Catalog-width: 1709px;
+  } /*
+  .Catalog-root {
     column-count: 5;
     max-width: 1709px;
-  }
+  }  */
 }

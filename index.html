@@ -1,13 +1,16 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js" as="script" />
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.core.min.js" as="script" />
+    <link rel="preload" href="index.js" as="script" />
+    
     <title>Wews - Headlines</title>
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js" as="script">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.core.min.js" as="script">
-    <link rel="preload" href="index.js" as="script">
-    <link rel="stylesheet" href="master.css">
+    <link rel="stylesheet" href="master.css" />
     
     <style>
       #listing section:nth-child(4n) {
@@ -34,13 +37,12 @@
     </style>
     
   </head>
-  <body class="">
-    
-    <aside id="config">
-      <button type="button" name="close" title="Collapse"></button>
+  <body class="Root">
+    <aside class="Config">
+      <button type="button" title="Collapse" class="Config-close"></button>
       
-      <form class="content">
-        <fieldset name="categories">
+      <form class="Config-body">
+        <fieldset class="Config-categories">
           <legend>Categories</legend>
           <button type="button">Everything</button>
           <button type="button">Sports</button>
@@ -51,14 +53,14 @@
           <button type="button">Entertainment</button>
         </fieldset>
         
-        <fieldset name="order">
+        <fieldset class="Config-ordering u-value">
           <legend>Sort by</legend>
           <input type="radio" name="order" value="Relevance">
           <input type="radio" name="order" value="Trending">
           <input type="radio" name="order" value="Latest">
         </fieldset>
         
-        <fieldset name="timespan">
+        <fieldset name="Config-interval u-value">
           <legend>Interval</legend>
           <input type="radio" name="timespan" value="Last day">
           <input type="radio" name="timespan" value="Last week">
@@ -69,7 +71,7 @@
           <input type="radio" name="timespan" value="All time">
         </fieldset>
         
-        <fieldset name="sources">
+        <fieldset name="Config-sources u-value">
           <legend>Sources</legend>
           <input type="checkbox" value="BBC">
           <input type="checkbox" value="Yahoo">
@@ -82,31 +84,17 @@
       </form>
     </aside>
     
-    <div id="main">
-      <header>
-        <form class="content">
-          <h1 title="Open settings">Wews</h1>
-          <input type="search" name="query" autofocus placeholder="search...">
-          <input type="checkbox" name="theme" title="Switch theme">
+    <div class="Root-body">
+      <header class="Header">
+        <form class="Header-root">
+          <h1 title="Open settings" class="Header-logo">Wews</h1>
+          <input type="search" autofocus placeholder="search..." class="Header-search">
+          <input type="checkbox" title="Switch theme" class="Header-themes u-button">
         </form>
       </header>
       
-      <article>
-        <div class="content">
-          <button type="button" name="close" title="Close"></button>
-          <section class="main">
-            <img src="https://goo.gl/usHM9M">
-            <p>Aliquam nec neque nec orci aliquet tempor. Maecenas et varius ipsum. Suspendisse eu justo dui. Phasellus quam magna, sagittis ac tincidunt quis, pulvinar at purus. In molestie suscipit libero luctus convallis. Donec rhoncus, nisi ac imperdiet eleifend, urna nulla malesuada nunc, quis aliquet neque lectus eget est. Donec quis semper turpis, sagittis eleifend ipsum. Vestibulum tristique, enim nec convallis pharetra, neque velit tincidunt velit, vel facilisis quam metus id mauris. Nullam sit amet ligula eleifend, bibendum neque quis, egestas sem. Mauris consectetur ante a pretium eleifend. Vivamus at ultricies ex. Curabitur dui ex, bibendum ac nunc nec, scelerisque pretium tortor. Pellentesque ac pharetra ipsum. Aliquam et nisl lobortis, porta augue vitae, finibus purus.</p>
-            <p>Quisque velit elit, varius eu luctus sit amet, pretium at ligula. Nulla euismod lobortis felis eget laoreet. Aliquam erat volutpat. Aenean auctor metus tincidunt dignissim venenatis. Aliquam nec pellentesque nisi. Suspendisse potenti. Aenean hendrerit eu ipsum nec maximus. Sed nec urna nec mauris viverra fermentum. Pellentesque quis metus ac lectus faucibus iaculis ut eget tellus.</p>
-            <p>Donec venenatis nisl sit amet dui sollicitudin, nec iaculis nisi aliquam. Duis eu dapibus magna. Proin ultrices in tortor vel mattis. Nullam gravida hendrerit cursus. Phasellus efficitur nisi ut lacus bibendum commodo. Quisque aliquet viverra velit quis gravida. Aenean vel pharetra nisl. Aenean et porttitor erat. Integer dictum euismod euismod. Donec vulputate vehicula justo vitae pharetra.</p>
-            <p>Vivamus ac vestibulum elit. Ut ut rhoncus enim, sed dignissim ante. Phasellus eu pulvinar tellus. Maecenas eget libero at purus fringilla commodo nec at nisi. Morbi eu purus non turpis luctus pellentesque et vel purus. Morbi iaculis vulputate quam, in bibendum diam molestie dapibus. In eget lorem urna. In molestie bibendum nulla, ultricies facilisis arcu aliquet ac. Cras a purus auctor, mattis eros non, placerat magna. Pellentesque eu sollicitudin dolor. Aenean rhoncus diam sit amet diam aliquet tristique. Praesent non arcu ut metus scelerisque commodo sed ac leo.</p>
-            <p>In nec magna dictum, dictum tellus eget, finibus felis. Donec metus ex, facilisis id dolor vel, blandit viverra dui. Proin vitae quam tempor, porttitor eros non, facilisis elit. Sed aliquet diam imperdiet dictum pharetra. Phasellus eleifend, ipsum nec tincidunt molestie, sem nisl faucibus eros, sit amet lacinia quam diam facilisis augue. Vivamus nec semper dui. Vestibulum facilisis ligula quis nunc elementum iaculis. Aliquam ut placerat leo. Maecenas orci lorem, rhoncus ut nibh nec, semper pharetra purus. Pellentesque vitae efficitur nunc. Cras quis imperdiet nulla. Pellentesque suscipit leo leo, consectetur blandit libero vehicula ac. Nulla a leo a felis molestie rutrum eu eu dui. Proin et ante augue. Etiam finibus vulputate metus non fringilla. Mauris laoreet dapibus quam.</p>
-          </section>
-        </div>
-      </article>
-      
-      <main id="listing">
-        <nav class="content">
+      <main class="Catalog">
+        <nav class="Catalog-root">
           <section>
             <h4>Aliquam laoreet tellus et porta faucibus.</h4>
           </section>
@@ -145,6 +133,20 @@
           </section>
         </nav>
       </main>
+      
+      <article class="Article">
+        <div class="Article-root">
+          <button type="button" title="Close" class="Article-close"></button>
+          <section class="Article-body">
+            <img src="https://goo.gl/usHM9M">
+            <p>Aliquam nec neque nec orci aliquet tempor. Maecenas et varius ipsum. Suspendisse eu justo dui. Phasellus quam magna, sagittis ac tincidunt quis, pulvinar at purus. In molestie suscipit libero luctus convallis. Donec rhoncus, nisi ac imperdiet eleifend, urna nulla malesuada nunc, quis aliquet neque lectus eget est. Donec quis semper turpis, sagittis eleifend ipsum. Vestibulum tristique, enim nec convallis pharetra, neque velit tincidunt velit, vel facilisis quam metus id mauris. Nullam sit amet ligula eleifend, bibendum neque quis, egestas sem. Mauris consectetur ante a pretium eleifend. Vivamus at ultricies ex. Curabitur dui ex, bibendum ac nunc nec, scelerisque pretium tortor. Pellentesque ac pharetra ipsum. Aliquam et nisl lobortis, porta augue vitae, finibus purus.</p>
+            <p>Quisque velit elit, varius eu luctus sit amet, pretium at ligula. Nulla euismod lobortis felis eget laoreet. Aliquam erat volutpat. Aenean auctor metus tincidunt dignissim venenatis. Aliquam nec pellentesque nisi. Suspendisse potenti. Aenean hendrerit eu ipsum nec maximus. Sed nec urna nec mauris viverra fermentum. Pellentesque quis metus ac lectus faucibus iaculis ut eget tellus.</p>
+            <p>Donec venenatis nisl sit amet dui sollicitudin, nec iaculis nisi aliquam. Duis eu dapibus magna. Proin ultrices in tortor vel mattis. Nullam gravida hendrerit cursus. Phasellus efficitur nisi ut lacus bibendum commodo. Quisque aliquet viverra velit quis gravida. Aenean vel pharetra nisl. Aenean et porttitor erat. Integer dictum euismod euismod. Donec vulputate vehicula justo vitae pharetra.</p>
+            <p>Vivamus ac vestibulum elit. Ut ut rhoncus enim, sed dignissim ante. Phasellus eu pulvinar tellus. Maecenas eget libero at purus fringilla commodo nec at nisi. Morbi eu purus non turpis luctus pellentesque et vel purus. Morbi iaculis vulputate quam, in bibendum diam molestie dapibus. In eget lorem urna. In molestie bibendum nulla, ultricies facilisis arcu aliquet ac. Cras a purus auctor, mattis eros non, placerat magna. Pellentesque eu sollicitudin dolor. Aenean rhoncus diam sit amet diam aliquet tristique. Praesent non arcu ut metus scelerisque commodo sed ac leo.</p>
+            <p>In nec magna dictum, dictum tellus eget, finibus felis. Donec metus ex, facilisis id dolor vel, blandit viverra dui. Proin vitae quam tempor, porttitor eros non, facilisis elit. Sed aliquet diam imperdiet dictum pharetra. Phasellus eleifend, ipsum nec tincidunt molestie, sem nisl faucibus eros, sit amet lacinia quam diam facilisis augue. Vivamus nec semper dui. Vestibulum facilisis ligula quis nunc elementum iaculis. Aliquam ut placerat leo. Maecenas orci lorem, rhoncus ut nibh nec, semper pharetra purus. Pellentesque vitae efficitur nunc. Cras quis imperdiet nulla. Pellentesque suscipit leo leo, consectetur blandit libero vehicula ac. Nulla a leo a felis molestie rutrum eu eu dui. Proin et ante augue. Etiam finibus vulputate metus non fringilla. Mauris laoreet dapibus quam.</p>
+          </section>
+        </div>
+      </article>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
