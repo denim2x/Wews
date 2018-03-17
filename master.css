@@ -1,13 +1,31 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin:400,400i,500,500i,600,600i,700,700i|Merienda+One');
 
 :root {
-  /* Variable declarations */
+  /* Global variables */
+  --Config-width: 11.83em;
   --Header-height: 2.92em;
-  --Article-padding: 0.5em;
-  --Config-width: 0em;
+  
   --Catalog-width: 350px;
   --Catalog-padding: 0.5em;
-  --min-width: 300px;
+  --Catalog-columns: 1;
+  --Catalog-rowUnit: 1.8em;
+  
+  --Article-padding: 0.5em;
+  --article: 0;
+  
+  --config: 0;
+  --minWidth: 300px;
+  --theme: 0;
+  --themeCycle: 0;
+  --themeDuration: 0.6s;
+  --themeEasing: ease-out;
+  
+  --scrollbarThumb: 3em;
+  --scrollbarOffset: 0;
+  --scrollbarZ: inherit;
+  
+  --labelBody: url("https://upload.wikimedia.org/wikipedia/commons/7/70/Solid_white.svg");
+  --labelBottom: url("https://upload.wikimedia.org/wikipedia/commons/d/d9/White_triangle.svg");
 }
 
 html, body {
@@ -26,16 +44,32 @@ html, body {
   font-family: 'Cabin', sans-serif;
   display: grid;
   grid-template-columns: auto 1fr;
-  --config: 0;
+  --configWidth: calc(var(--config) * var(--Config-width));
 }
 
-.Root.is-config {
-  --config-width: 11.83em;
+.Root.is-configOpen {
   --config: 1;
 }
 
 .Root.is-dark {
   --theme: 1;
+}
+
+img {
+  transition:
+    filter var(--themeDuration) var(--themeEasing);
+    
+  filter: invert(calc(100% * var(--theme)));
+}
+
+form, fieldset {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  position: relative;
 }
 
 [type] {
@@ -53,13 +87,14 @@ html, body {
   cursor: pointer;
 }
 
-.u-button {
+.u-buttons [type="radio"], .u-buttons [type="checkbox"] {
   cursor: pointer;
   -moz-appearance: button;
   -webkit-appearance: button;
+  -ms-appearance: button;
 }
 
-.u-value [value]:before {
+.u-values [value]:before {
   padding: 0;
   background: none;
   content: attr(value);
@@ -73,76 +108,89 @@ html, body {
   text-transform: inherit;
 }
 
+.u-scrollbar {
+  /*overflow: hidden;*/
+  overflow: auto;
+}
+
+.u-scrollbar:after {
+  transition:
+    opacity 0.4s ease-in;
+    
+  opacity: 0;
+  
+  top: var(--scrollbarOffset);
+  right: 0.1em;
+  
+  height: var(--scrollbarThumb);
+  border-radius: 0.1em;
+  
+  position: absolute;
+  z-index: var(--scrollbarZ);
+}
+
+.u-scrollbar:hover:after, .u-scrollbar:focus:after {
+  /*opacity: 1;*/
+}
+
+[class*="label_"]:before {
+  transition: opacity 0.2s ease-out;
+  
+  opacity: 0;
+  
+  content: attr(aria-label);
+  --labelPadding: 0.3em;
+  padding: var(--labelPadding);
+  font-family: 'Cabin', sans-serif;
+  font-size: 0.53em;
+  font-weight: 400;
+  display: block;
+  width: auto;
+  white-space: nowrap;
+  position: absolute;
+  --labelTip: none;
+  --labelTipSize: 0.5em;
+  --labelTipPosition: center;
+  --labelBodySize: 100%;
+  --labelBodyPosition: center;
+  background: no-repeat var(--labelBodyPosition)/var(--labelBodySize) var(--labelBody), no-repeat var(--labelTipPosition)/var(--labelTipSize) var(--labelTip);
+  pointer-events: none;
+  isolation: isolate;
+}
+
+[aria-label][class*="label_"]:before {
+  opacity: 1;
+}
+
+[aria-label].label_bottom:before {
+  padding: calc(var(--labelTipSize) + var(--labelPadding)) var(--labelPadding) var(--labelPadding) var(--labelPadding);
+  top: 100%;
+  left: 0;
+  --labelTip: var(--labelBottom);
+  --labelTipPosition: 25% 0;
+  --labelBodySize: 100% calc(100% - var(--labelTipSize));
+  --labelBodyPosition: center var(--labelTipSize);
+}
+
 .Config {
   transition:
     width 0.2s ease-out;
     
-  width: var(--Config-width);
+  width: var(--configWidth);
   /*width: 12.3em;*/
   /*background: hsl(0, 0%, 63%);*/
   background: hsl(0, 0%, 58%);
   position: relative;
   height: 100vh;
   box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 1fr 0.545em;
-}
-
-.Config-close {
-  transition:
-    background-color 0.2s ease-in;
-    
-  /*opacity: calc(0.25 * var(--config));*/
-  /*opacity: 0.33;*/
-  /*background: no-repeat 0% 0%/70% 100% url("https://image.flaticon.com/icons/svg/70/70429.svg");*/
-  background-color: hsl(0, 0%, 54%);
-    
-  width: 100%;
-  height: 100vh;
-  /*background-image: url("https://image.flaticon.com/icons/svg/25/25705.svg");*/
-  position: relative;
-  grid-column: 2;
-  grid-row: 1;
-  display: block;
-  /*right: 0.85em;*/
-  /*top: 1.195em;*/
-  /*left: 0.13em;*/
-  /*top: 1.35em;*/
-  /*z-index: 1;*/
-}
-
-.Config-close:hover {
-  /*opacity: 0.4 !important;*/
-  background-color: hsl(0, 0%, 52%);
-}
-
-.Config-close:active {
-  /*opacity: 0.5 !important;*/
-  background-color: hsl(0, 0%, 50%);
-}
-
-.Config [type] {
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.Config-body, .Config fieldset {
-  border: none;
-  outline: none;
-  background: none;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  position: relative;
+  z-index: 0;
 }
 
 .Config-body {
   color: hsl(0, 0%, 95%);
   /*padding: 2.6em 2.2em;*/
-  overflow-y: auto;
   display: block;
   width: 100%;
-  height: 100vh;
   padding-top: 0.21em;
   padding-bottom: 1em;
   grid-column: 1;
@@ -181,11 +229,10 @@ html, body {
   height: 1.76em;
   font-size: 0.75em;
   position: relative;
-  -webkit-appearance: button;
-  -moz-appearance: button;
-  cursor: pointer;
   margin: 0 0 0 1.65em;
   padding: 1px 6px;
+  text-transform: uppercase;
+  font-weight: 700;
   /*font-size: 0.76em;*/
 }
 
@@ -198,44 +245,59 @@ html, body {
   text-align: center;
 }
 
-.Root-body{
-  transition: 
-    background-color 0.25s ease-in;
-    
-  background: hsl(0, 0%, calc(82% + (20% - 82%) * var(--theme)));
-    
-  --theme: 0;
-  --theme-cycle: 0;
+.Root-body {
   width: 100%;
   height: 100vh;
+  z-index: 1;
+  position: relative;
 }
 
-.Article.is-enabled {
-  visibility: visible;
-}
-
-.Article.is-visible {
-  opacity: 1;
+.Root-body:after {
+  transition:   /*
+    background-position 0.25s ease-in,
+    background-size 0.25s ease-in,
+    background 0.25s ease-in,      */
+    left var(--themeDuration) var(--themeEasing),
+    bottom var(--themeDuration) var(--themeEasing);
+    
+  /*background: no-repeat top right/calc(var(--theme) * 100%) radial-gradient(circle, #fff 0%, #9E9E9E 70%, #B5B5B5 80%, #7A7A7A 95%, #A1A1A1 99%, #000);*/
+  background: no-repeat radial-gradient(circle at top 25% left 75%, /*#0ff 4%, #fff 5%,*/ #fff 20%, #9E9E9E 30%, #B5B5B5 35%, #7A7A7A 47%, #A1A1A1 49%, #000 50%);
+  /*background-size: calc(100% * var(--theme));*/
+  /*background-repeat: no-repeat;*/
+  /*background-position-x: calc(-50 * var(--theme));*/
+  /*background-position-y: calc(50% * var(--theme));*/
+  content: "";
+  position: absolute;
+  left: calc(-250% * var(--theme));
+  bottom: calc(-250% * var(--theme));
+  width: 400%;
+  height: 400%;
+  mix-blend-mode: exclusion;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.9;
 }
 
 .Header {
   transition: 
     width 0.2s ease-out,
-    filter 0.25s ease-in;
+    /*filter 0.25s ease-in,*/
+    opacity 0.2s ease-in;
     
-  --offset: 0px;
-  width: calc(100% - var(--offset) - var(--Config-width));
-  filter: invert(calc(63% * var(--theme)));
-  
+  width: calc(100% - var(--configWidth));
+  /*filter: invert(calc(63% * var(--theme)));*/
+  opacity: 0.7;
   height: var(--Header-height);
   position: fixed;
   top: 0;
   background: hsl(0, 0%, 99%);
-  opacity: 0.85;
-  z-index: 2;
   color: hsl(0, 0%, 17%);
-  pointer-events: none;
   box-sizing: border-box;
+  z-index: 4;
+}
+
+.Header.is-focused {
+  opacity: 0.85;
 }
 
 .Header-root {
@@ -244,34 +306,18 @@ html, body {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  pointer-events: initial;
 }
 
 .Header-root [type] {
-  border: none;
-  margin: 0;
-  position: relative;
   display: inline-block;
   box-sizing: border-box;
 }
 
-.Header-root [type]:focus {
+.Header-root [type], .Header-root [type]:focus {
   border: none;
   outline: none;
 }
-/*
-.Header [name="config"] {
-  transition:
-    width 0.4s ease-out;
-    
-  background-image: url("https://image.flaticon.com/icons/svg/54/54175.svg");
-  width: calc(1.00em * (1 - var(--config)));
-  height: 1.00em;
-  margin-top: 1.25em;
-  margin-left: 0.2em;
-  opacity: 0.64;
-}
-*/
+
 .Header-logo {
   transition:
     color 0.2s ease-out;
@@ -291,7 +337,7 @@ html, body {
   color: transparent;
 }
 
-.Header-logo:before {
+.Header-logo:after {
   transition:
     opacity 0.2s ease-in;
     
@@ -300,6 +346,7 @@ html, body {
   /*z-index: 2;*/
   position: absolute;
   left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
   display: block;
@@ -307,24 +354,15 @@ html, body {
   background: no-repeat center 60%/72% url("https://image.flaticon.com/icons/svg/54/54175.svg");
 }
 
-.Header-logo:hover:before {
-  opacity: 0.85;
-}
-
-body.config .Header-logo:before {
+.Root.is-configOpen .Header-logo:after {
   background: no-repeat center 20%/35% url("https://image.flaticon.com/icons/svg/159/159097.svg");
 }
 
-body.config .Header-logo:hover:before {
-  opacity: 0.7;
+.Header-logo:hover:after {
+  opacity: calc(0.85 + (0.7 - 0.85) * var(--config));
 }
 
 .Header-search {
-  transition:
-    opacity 0.2s ease-in;
-    
-  opacity: 0.7;
-  
   background: none;
   font-family: inherit;
   font-size: 1.4em;
@@ -335,26 +373,29 @@ body.config .Header-logo:hover:before {
   overflow: hidden;
   height: 100%;
   grid-column: 2;
-}
-
-.Header-search:focus {
-  opacity: 1;
+  margin: 0;
+  position: relative;
 }
 
 .Header-themes {
   transition: 
-    transform 0.41s ease-out,
+    background-position 0.41s ease-out,
     opacity 0.2s ease-in;
     
   transform: rotateZ(calc(180deg * var(--theme-cycle)));
   opacity: 0.57;
   
-  background-image: url("https://image.flaticon.com/icons/svg/25/25636.svg");
-  margin-top: 1.15em;
-  margin-right: 0.65em;
-  width: 1.35em;
-  height: 1.35em;
+  background-color: #000;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/d/da/White_dot.svg");
+  background-size: 75%;
+  background-position: 50% calc(10% + (90% - 10%) * var(--theme));
+  margin-top: 0.24em;
+  margin-right: 0.3em;
+  width: 1.45em;
+  /*height: 1.35em;*/
+  height: 85%;
   grid-column: 3;
+  border-radius: 0.75em;
 }
 
 .Header-themes:hover {
@@ -366,21 +407,22 @@ body.config .Header-logo:hover:before {
 }
 
 .Catalog {
-  --columns: 1;
-  --column-gap: 0.44em;
   width: 100%;
   height: 100%;
   display: block;
-  overflow: auto;
   box-sizing: border-box;
   position: relative;
   padding: calc(var(--Header-height) + var(--Catalog-padding)) var(--Catalog-padding) var(--Catalog-padding) var(--Catalog-padding);
+  z-index: 2;
+  background: hsl(0, 0%, 82%);
 }
 
 .Catalog-root {
-  /*column-gap: var(--listing-gap);*/
-  /*column-fill: balance;*/
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(var(--Catalog-columns), 1fr);
+  grid-auto-rows: var(--Catalog-rowUnit);
+  grid-gap: 0.44em;
+  
   position: relative;
   width: 100%;
   /*max-width: 350px;*/
@@ -392,13 +434,18 @@ body.config .Header-logo:hover:before {
 
 .Catalog-root section {
   transition: 
-    background-color 0.41s ease-out, 
-    color 0.25s ease-in, 
+    /*background-color 0.41s ease-out, */
+    /*color 0.25s ease-in, */
     opacity 0.2s ease-in;
     
-  background: hsl(0, 0%, calc(100% + (40% - 100%) * var(--theme)));
-  color: hsl(0, 0%, calc(20% + (95% - 20%) * var(--theme)));
+  /*--background: hsl(0, 0%, calc(100% + (40% - 100%) * var(--theme)));*/
+  --background: hsl(0, 0%, 100%);
+  background: var(--background);
+  /*color: hsl(0, 0%, calc(20% + (95% - 20%) * var(--theme)));*/
+  color: hsl(0, 0%, 20%);
   opacity: 0.8;
+  
+  grid-row: span var(--weight);
   
   display: inline-block;
   position: relative;
@@ -406,6 +453,23 @@ body.config .Header-logo:hover:before {
   cursor: pointer;
   padding: 0.6em;
   box-sizing: border-box;
+  overflow: hidden;
+}
+
+.Catalog-root section:after {
+  /*transition: background-color 5s ease-out;*/
+  transition: inherit;
+  content: "";
+  width: 100%;
+  height: 2em;
+  pointer-events: none;
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+  left: 0;
+  bottom: 0;
+  /*background: linear-gradient(to bottom, transparent, hsl(0, 0%, calc(100% * (1 - var(--theme)))));*/
+  background: linear-gradient(to bottom, transparent, var(--background));
 }
 
 .Catalog-root section:hover {
@@ -418,21 +482,36 @@ body.config .Header-logo:hover:before {
   line-height: 1.25;
   margin: 0;
   color: inherit;
+  
+  position: relative;
 }
 
 .Article {
-  transition: opacity 0.41s ease-out;
-  opacity: 0;
+  transition: 
+    opacity 0.3s ease-out;
+    
+  opacity: var(--article);
   
   visibility: hidden;
   position: absolute;
   width: 100%;
   height: 100%;
-  padding: calc(var(--.Header-height) + var(--.Article-padding)) var(--.Article-padding) var(--.Article-padding) var(--.Article-padding);
+  padding: calc(var(--Header-height) + var(--Article-padding)) var(--Article-padding) var(--Article-padding) var(--Article-padding);
   box-sizing: border-box;
   background: hsla(0, 0%, 55%, 0.975);
-  overflow: auto;
-  z-index: 1;
+  
+  z-index: 3;
+  --scrollbarZ: 5;
+  top: 0;
+  left: 0;
+}
+
+.Article.is-enabled {
+  visibility: visible;
+}
+
+.Article.is-visible {
+  --article: 1;
 }
 
 .Article-close {
@@ -445,9 +524,9 @@ body.config .Header-logo:hover:before {
   height: 23px;
   z-index: 1;
   position: sticky;
-  margin: var(--.Article-padding) 0.5em;
+  margin: var(--Article-padding) 0.5em;
   float: right;
-  top: calc(var(--.Article-padding));
+  top: calc(var(--Article-padding));
   background: no-repeat url("https://image.flaticon.com/icons/svg/128/128531.svg");
 }
 
@@ -461,11 +540,17 @@ body.config .Header-logo:hover:before {
 
 .Article-root {
   transition: 
+    transform 0.3s ease-out;   /*
     background-color 0.41s ease-out, 
-    color 0.25s ease-in;
+    color 0.25s ease-in;  */
     
-  background: hsl(0, 0%, calc(93% + (40% - 93%) * var(--theme)));
-  color: hsl(0, 0%, calc(20% + (95% - 20%) * var(--theme)));
+  transform: scale(calc(0.8 + (1 - 0.8) * var(--article)));
+  transform-origin: center 20%;
+  
+  /*background: hsl(0, 0%, calc(93% + (40% - 93%) * var(--theme)));*/
+  background: hsl(0, 0%, 93%);
+  /*color: hsl(0, 0%, calc(20% + (95% - 20%) * var(--theme)));*/
+  color: hsl(0, 0%, 20%);
     
   border-radius: 0.5em;
   background-clip: padding-box;
@@ -489,45 +574,29 @@ body.config .Header-logo:hover:before {
 
 /* TODO: Normalize breakpoints */
 @media screen and (min-width: 600px) {
-  .Catalog {
-    --columns: 2;
+  :root {
+    --Catalog-columns: 2;
     --Catalog-width: 670px;
-  } /*
-  .Catalog-root {
-    column-count: 2;
-    max-width: 670px;
-  }  */
+  }
 }
 
 @media screen and (min-width: 830px) {
-  .Catalog {
-    --columns: 3;
+  :root {
+    --Catalog-columns: 3;
     --Catalog-width: 950px;
-  } /*
-  .Catalog-root {
-    column-count: 3;
-    max-width: 950px;
-  }  */
+  }
 }
 
 @media screen and (min-width: 1080px) {
-  .Catalog {
-    --columns: 4;
+  :root {
+    --Catalog-columns: 4;
     --Catalog-width: 1250px;
-  } /*
-  .Catalog-root {
-    column-count: 4;
-    max-width: 1250px;
-  }  */
+  }
 }
-/* Calculated through interpolation */
-@media screen and (min-width: 1450px) {
-  .Catalog {
-    --columns: 5;
-    --Catalog-width: 1709px;
-  } /*
-  .Catalog-root {
-    column-count: 5;
-    max-width: 1709px;
-  }  */
+
+@media screen and (min-width: 1405px) {
+  :root {
+    --Catalog-columns: 5;
+    --Catalog-width: 1644px;
+  }
 }

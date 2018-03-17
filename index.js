@@ -24,8 +24,14 @@ let Local = {
 };
 
 $.extend({
-  active() {
-    return $(document.activeElement);
+  _find: $.find
+});
+$.extend({
+  find(sel, ctx, res, seed) {
+    if (sel == null) {
+      return $(document.activeElement);
+    }
+    return $._find(...arguments);
   }
 });
 
@@ -119,57 +125,50 @@ $.fn.extend({
   }
 });
 
-$('#main [name="query"]')
-  .on('blur', () => {
-    $('body').on('keydown.search', ({ ctrlKey: c, altKey: a, shiftKey: s, which }) => {
-      if ((which > 64 && which < 91 || which == 32) && !c && !a) {
-        $('body').off('keydown.search');
-        $('#main [name="query"]').focus();
-      }
-    });
+$('.Root').on('keydown.search', ({ ctrlKey: c, altKey: a, shiftKey: s, which }) => {
+  if ((which > 64 && which < 91 || which == 32) && !c && !a) {
+    $('.Header-search').focus();
+  }
+});
+  
+$('.Header-logo').click(({ }) => {
+  $('.Root').toggleClass('is-configOpen', (on) => {
+    $('.Header-logo').attr('title', `${ on ? 'Close' : 'Open' } settings`);
+  });
+});
+
+$('.Header-search')
+  .on('focus', ({ }) => {
+    $('.Header').addClass('is-focused');
+  })
+  .on('blur', ({ }) => {
+    $('.Header').removeClass('is-focused');
   })
   .on('keydown', ({ ctrlKey: c, altKey: a, shiftKey: s, which }) => {
-    if (which == 27) {
-      $('#main [name="query"]').blur();
+    if (which == 27) {     // Esc
+      $('.Header-search').blur();
       return false;
     }
   });
 
-$('#config [name="close"]').click(({ }) => {
-  $('body').removeClass('config');
-})
-  
-$('header').css('--offset', $('#listing').width('scrollbar-y'));
-
-$('header h1').click(({ }) => {
-  $('body').toggleClass('config', (on) => {
-    $('header h1').attr('title', `${ on ? 'Close' : 'Open' } settings`);
-  });
+let theme = $('.Root').css('#--themeCycle');
+$('.Header-themes').click(({ }) => {
+  $('.Root').toggleClass('is-dark').css('--themeCycle', `${ ++theme }`);
 });
 
-let theme = $('#main').css('#--theme-cycle');
-$('header [name="theme"]').click(({ }) => {
-  $('#main').toggleClass('theme');
-  $('#main').css('--theme-cycle', `${ ++theme }`);
+$('.Catalog-root section').click(({ }) => {
+  $('.Article').addClass('is-enabled').addClass('is-visible');
 });
 
-  
-$('#listing section').click(({ }) => {
-  $('#main').addClass('article').addClass('article-visible');
-  $('header').css('--offset', $('article').width('scrollbar-y'));
-});
-
-$('article [name="close"]').click(({ }) => {
-  $('header').css('--offset', $('#listing').width('scrollbar-y'));
+$('.Article-close').click(({ }) => {
   // TODO: Use transition duration from CSS
-  $('article').one('transitionend', ({ }) => {
-    let self = $('article');          //let c=0;
+  $('.Article').one('transitionend', ({ }) => {
+    let self = $('.Article');          //let c=0;
     let timer = setInterval(() => {
       if (self.css('opacity') == 0) {
-        $('#main').removeClass('article');
+        self.removeClass('is-enabled');
         clearInterval(timer);         //console.log(c);
       }                               //else c++;
     }, 230);
-  });
-  $('#main').removeClass('article-visible');
+  }).removeClass('is-visible');
 });

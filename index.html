@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
+    <meta name="application-name" content="Wews" />
+    <meta name="author" content="denim2x" />
+    <meta name="description" content="The friendly news aggregator" />
+    <meta name="abstract" content="A friendly news aggregator web app" />
+    
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js" as="script" />
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.core.min.js" as="script" />
     <link rel="preload" href="index.js" as="script" />
@@ -13,20 +18,20 @@
     <link rel="stylesheet" href="master.css" />
     
     <style>
-      #listing section:nth-child(4n) {
-        min-height: 8em;
+      .Catalog-root :nth-child(4n) {
+        --weight: 3;
       }
       
-      #listing section:nth-child(4n+1) {
-        min-height: 4em;
+      .Catalog-root :nth-child(4n+1) {
+        --weight: 4;
       }
       
-      #listing section:nth-child(4n+2) {
-        min-height: 6em;
+      .Catalog-root :nth-child(4n+2) {
+        --weight: 2;
       }
       
-      #listing section:nth-child(4n+3) {
-        min-height: 5em;
+      .Catalog-root :nth-child(4n+3) {
+        --weight: 3;
       }
       
       article img {
@@ -37,11 +42,9 @@
     </style>
     
   </head>
-  <body class="Root">
-    <aside class="Config">
-      <button type="button" title="Collapse" class="Config-close"></button>
-      
-      <form class="Config-body">
+  <body class="Root u-buttons">
+    <aside class="Config u-scrollbar">
+      <form class="Config-body u-values">
         <fieldset class="Config-categories">
           <legend>Categories</legend>
           <button type="button">Everything</button>
@@ -53,14 +56,14 @@
           <button type="button">Entertainment</button>
         </fieldset>
         
-        <fieldset class="Config-ordering u-value">
+        <fieldset class="Config-ordering">
           <legend>Sort by</legend>
           <input type="radio" name="order" value="Relevance">
           <input type="radio" name="order" value="Trending">
           <input type="radio" name="order" value="Latest">
         </fieldset>
         
-        <fieldset name="Config-interval u-value">
+        <fieldset name="Config-interval">
           <legend>Interval</legend>
           <input type="radio" name="timespan" value="Last day">
           <input type="radio" name="timespan" value="Last week">
@@ -71,7 +74,7 @@
           <input type="radio" name="timespan" value="All time">
         </fieldset>
         
-        <fieldset name="Config-sources u-value">
+        <fieldset name="Config-sources">
           <legend>Sources</legend>
           <input type="checkbox" value="BBC">
           <input type="checkbox" value="Yahoo">
@@ -79,6 +82,12 @@
           <input type="checkbox" value="Bing">
           <input type="checkbox" value="NBC">
           <input type="checkbox" value="MSN">
+          <input type="checkbox" value="Engadget">
+          <input type="checkbox" value="The Verge">
+          <input type="checkbox" value="CNET">
+          <input type="checkbox" value="TechCrunch">
+          <input type="checkbox" value="TechRadar">
+          <input type="checkbox" value="Wired">
           <input type="checkbox" value="Express">
         </fieldset>
       </form>
@@ -89,11 +98,11 @@
         <form class="Header-root">
           <h1 title="Open settings" class="Header-logo">Wews</h1>
           <input type="search" autofocus placeholder="search..." class="Header-search">
-          <input type="checkbox" title="Switch theme" class="Header-themes u-button">
+          <input type="checkbox" title="Switch theme" class="Header-themes">
         </form>
       </header>
       
-      <main class="Catalog">
+      <main class="Catalog u-scrollbar">
         <nav class="Catalog-root">
           <section>
             <h4>Aliquam laoreet tellus et porta faucibus.</h4>
@@ -134,7 +143,7 @@
         </nav>
       </main>
       
-      <article class="Article">
+      <article class="Article u-scrollbar">
         <div class="Article-root">
           <button type="button" title="Close" class="Article-close"></button>
           <section class="Article-body">
