@@ -488,7 +488,8 @@ form, fieldset {
 
 .Article {
   transition: 
-    opacity 0.3s ease-out;
+    opacity 0.3s ease-out,
+    background-color var(--themeDuration) var(--themeEasing);
     
   opacity: var(--article);
   
@@ -498,7 +499,7 @@ form, fieldset {
   height: 100%;
   padding: calc(var(--Header-height) + var(--Article-padding)) var(--Article-padding) var(--Article-padding) var(--Article-padding);
   box-sizing: border-box;
-  background: hsla(0, 0%, 55%, 0.975);
+  background: hsla(0, 0%, calc(55% + (85% - 55%) * var(--theme)), 0.975);
   
   z-index: 3;
   --scrollbarZ: 5;
