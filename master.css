@@ -3,6 +3,7 @@
 :root {
   /* Global variables */
   --Config-width: 11.83em;
+  --Config-close: 1;
   --Header-height: 2.92em;
   
   --Catalog-width: 350px;
@@ -14,9 +15,9 @@
   --article: 0;
   
   --config: 0;
-  --minWidth: 300px;
+  --minWidth: 244px;
   --theme: 0;
-  --themeCycle: 0;
+  /*--themeCycle: 0;*/
   --themeDuration: 0.6s;
   --themeEasing: ease-out;
   
@@ -24,6 +25,7 @@
   --scrollbarOffset: 0;
   --scrollbarZ: inherit;
   
+  --configClose: url("https://image.flaticon.com/icons/svg/159/159097.svg");
   --labelBody: url("https://upload.wikimedia.org/wikipedia/commons/7/70/Solid_white.svg");
   --labelBottom: url("https://upload.wikimedia.org/wikipedia/commons/d/d9/White_triangle.svg");
 }
@@ -85,6 +87,15 @@ form, fieldset {
 [type="button"] {
   border: none;
   cursor: pointer;
+}
+
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-ms-clear {
+  display: none;
+}
+
+input[type="button"] {
+  padding: 0;
 }
 
 .u-buttons [type="radio"], .u-buttons [type="checkbox"] {
@@ -155,7 +166,6 @@ form, fieldset {
   --labelBodyPosition: center;
   background: no-repeat var(--labelBodyPosition)/var(--labelBodySize) var(--labelBody), no-repeat var(--labelTipPosition)/var(--labelTipSize) var(--labelTip);
   pointer-events: none;
-  isolation: isolate;
 }
 
 [aria-label][class*="label_"]:before {
@@ -177,13 +187,34 @@ form, fieldset {
     width 0.2s ease-out;
     
   width: var(--configWidth);
+  /*max-width: 100vw;*/
   /*width: 12.3em;*/
   /*background: hsl(0, 0%, 63%);*/
   background: hsl(0, 0%, 58%);
   position: relative;
   height: 100vh;
   box-sizing: border-box;
-  z-index: 0;
+  z-index: 2;
+  max-width: 74vw;
+}
+
+.Config-close {
+  transition:
+    opacity 0.2s ease-in,
+    transform 0.2s ease-in;
+    
+  opacity: calc(0.40 * var(--Config-close));
+  transform: translateX(calc(0.75em * (1 - var(--Config-close))));
+  
+  width: 1.50em;
+  height: 1.50em;
+  background: no-repeat center/100% var(--configClose);
+  position: sticky;
+  float: right;
+  margin: 1.45em 0.90em;
+  right: 0.90em;
+  top: 1.45em;
+  z-index: 1;
 }
 
 .Config-body {
@@ -195,6 +226,10 @@ form, fieldset {
   padding-bottom: 1em;
   grid-column: 1;
   grid-row: 1;
+  min-width: 151px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .Config-body fieldset {
@@ -245,11 +280,52 @@ form, fieldset {
   text-align: center;
 }
 
+.Config-sharing [type] {
+  transition: 
+    opacity 0.2s ease-in;
+    
+  opacity: 0.54;
+  
+  display: inline-block;
+  width: 2.2em;
+  height: 2.2em;
+  margin-right: 0.4em;
+}
+
+.Config-sharing [type]:hover {
+  opacity: 0.6;
+}
+
+.Config-sharing [type]:active {
+  opacity: 0.78;
+}
+
+.Config-sharing [type]:not(:nth-of-type(1)) {
+  margin-left: 0;
+}
+
+.Config-sharing [type]:nth-of-type(1) {
+  margin-left: calc(1.65em + 6px);
+}
+
+.Config-rss {
+  background-image: url("https://image.flaticon.com/icons/svg/23/23693.svg");
+}
+
+.Config-fb {
+  background-image: url("https://image.flaticon.com/icons/svg/23/23747.svg");
+}
+
+.Config-tw {
+  background-image: url("https://image.flaticon.com/icons/svg/23/23931.svg");
+}
+
 .Root-body {
   width: 100%;
   height: 100vh;
   z-index: 1;
   position: relative;
+  /*min-width: 26vw;*/
 }
 
 .Root-body:after {
@@ -294,6 +370,8 @@ form, fieldset {
   color: hsl(0, 0%, 17%);
   box-sizing: border-box;
   z-index: 4;
+  right: 0;
+  min-width: 160px;
 }
 
 .Header.is-focused {
@@ -320,17 +398,26 @@ form, fieldset {
 
 .Header-logo {
   transition:
+    opacity 0.2s ease-out,
     color 0.2s ease-out;
     
+  opacity: calc(1 - var(--Config-close) * var(--config));
+  
   font-family: 'Merienda One', cursive;
   font-size: 1.7em;
+  /*font-size: 100%;*/
+  /*width: 77px;*/
   /*margin: 0.4em 0.25em 0 1.25em;*/
   margin: 0.4em 0.25em 0 0.38em;
   position: relative;
+  right: 0;
   line-height: 1;
   display: inline-block;
   cursor: pointer;
   grid-column: 1;
+  /*width: ;*/
+  /*max-width: calc(100vw - var(--configWidth));*/
+  /*min-width: 10px;*/
 }
 
 .Header-logo:hover {
@@ -355,7 +442,7 @@ form, fieldset {
 }
 
 .Root.is-configOpen .Header-logo:after {
-  background: no-repeat center 20%/35% url("https://image.flaticon.com/icons/svg/159/159097.svg");
+  background: no-repeat center 20%/35% var(--configClose);
 }
 
 .Header-logo:hover:after {
@@ -377,24 +464,54 @@ form, fieldset {
   position: relative;
 }
 
-.Header-themes {
+.Header-tools {
+  grid-column: 3;
+  white-space: nowrap;
+  min-width: 64px;
+  position: sticky;
+  left: 0; /*var(--configWidth);*/
+}
+
+.Header-account {
   transition: 
-    background-position 0.41s ease-out,
     opacity 0.2s ease-in;
     
-  transform: rotateZ(calc(180deg * var(--theme-cycle)));
-  opacity: 0.57;
+  opacity: 0.55;
   
+  background-image: url("https://image.flaticon.com/icons/svg/72/72905.svg");
+  margin-right: 0.31em;
+  margin-top: 0.65em;
+  width: 2.32em;
+  height: 2.32em;
+  position: relative;
+  float: left;
+}
+
+.Header-account:hover {
+  opacity: 0.71;
+}
+
+.Header-account:active {
+  opacity: 0.89;
+}
+
+.Header-themes {
+  transition: 
+    opacity 0.2s ease-in,
+    background-position 0.41s ease-out;
+    
+  opacity: 0.57;
+  background-position: 50% calc(10% + (90% - 10%) * var(--theme));
+  
+  /*transform: rotateZ(calc(180deg * var(--theme-cycle)));*/
   background-color: #000;
   background-image: url("https://upload.wikimedia.org/wikipedia/commons/d/da/White_dot.svg");
-  background-size: 75%;
-  background-position: 50% calc(10% + (90% - 10%) * var(--theme));
+  background-size: 72%;
   margin-top: 0.24em;
-  margin-right: 0.3em;
+  margin-right: 0.45em;
   width: 1.45em;
   /*height: 1.35em;*/
   height: 85%;
-  grid-column: 3;
   border-radius: 0.75em;
 }
 
@@ -407,7 +524,7 @@ form, fieldset {
 }
 
 .Catalog {
-  width: 100%;
+  width: calc(100vw - var(--configWidth));
   height: 100%;
   display: block;
   box-sizing: border-box;
@@ -415,6 +532,8 @@ form, fieldset {
   padding: calc(var(--Header-height) + var(--Catalog-padding)) var(--Catalog-padding) var(--Catalog-padding) var(--Catalog-padding);
   z-index: 2;
   background: hsl(0, 0%, 82%);
+  overflow-x: auto;
+  min-width: 100%;
 }
 
 .Catalog-root {
@@ -429,36 +548,34 @@ form, fieldset {
   max-width: var(--Catalog-width);
   margin: 0 auto;
   box-sizing: border-box;
-  min-width: var(--min-width);
+  /*min-width: var(--min-width);*/
+  min-width: 187px;
 }
 
 .Catalog-root section {
-  transition: 
-    /*background-color 0.41s ease-out, */
-    /*color 0.25s ease-in, */
+  transition:
     opacity 0.2s ease-in;
     
-  /*--background: hsl(0, 0%, calc(100% + (40% - 100%) * var(--theme)));*/
-  --background: hsl(0, 0%, 100%);
-  background: var(--background);
-  /*color: hsl(0, 0%, calc(20% + (95% - 20%) * var(--theme)));*/
-  color: hsl(0, 0%, 20%);
   opacity: 0.8;
   
-  grid-row: span var(--weight);
+  --background: hsl(0, 0%, 100%);
+  background: var(--background);
   
-  display: inline-block;
-  position: relative;
-  vertical-align: top;
-  cursor: pointer;
-  padding: 0.6em;
+  grid-row: span var(--weight);
   box-sizing: border-box;
+  position: relative;
+  
+  color: hsl(0, 0%, 20%);
+  cursor: pointer;
+  
+  vertical-align: top;
+  display: inline-block;
+  
+  padding: 0.6em;
   overflow: hidden;
 }
 
 .Catalog-root section:after {
-  /*transition: background-color 5s ease-out;*/
-  transition: inherit;
   content: "";
   width: 100%;
   height: 2em;
@@ -468,7 +585,6 @@ form, fieldset {
   box-sizing: border-box;
   left: 0;
   bottom: 0;
-  /*background: linear-gradient(to bottom, transparent, hsl(0, 0%, calc(100% * (1 - var(--theme)))));*/
   background: linear-gradient(to bottom, transparent, var(--background));
 }
 
@@ -493,7 +609,7 @@ form, fieldset {
     
   opacity: var(--article);
   
-  visibility: hidden;
+  /*visibility: hidden;*/
   position: absolute;
   width: 100%;
   height: 100%;
@@ -505,6 +621,7 @@ form, fieldset {
   --scrollbarZ: 5;
   top: 0;
   left: 0;
+  pointer-events: none;
 }
 
 .Article.is-enabled {
@@ -513,6 +630,7 @@ form, fieldset {
 
 .Article.is-visible {
   --article: 1;
+  pointer-events: auto;
 }
 
 .Article-close {
@@ -562,7 +680,8 @@ form, fieldset {
   max-width: 850px;
   margin: 0 auto;
   display: block;
-  min-width: var(--min-width);
+  /*min-width: var(--min-width);*/
+  min-width: 213px;
 }
 
 .Article-body {
@@ -571,6 +690,18 @@ form, fieldset {
 
 .Article-body p {
   margin: 0 0 0.7em 0;
+}
+
+.Article-body img {
+  max-width: 100%;
+  box-sizing: border-box;
+  min-width: 100px;
+}
+
+@media screen and (min-width: 349px) {
+  :root {
+    --Config-close: 0;
+  }
 }
 
 /* TODO: Normalize breakpoints */

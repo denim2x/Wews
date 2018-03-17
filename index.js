@@ -130,6 +130,10 @@ $('.Root').on('keydown.search', ({ ctrlKey: c, altKey: a, shiftKey: s, which }) 
     $('.Header-search').focus();
   }
 });
+
+$('.Config-close').click(({ }) => {
+  $('.Root').removeClass('is-configOpen');
+});
   
 $('.Header-logo').click(({ }) => {
   $('.Root').toggleClass('is-configOpen', (on) => {
@@ -153,14 +157,17 @@ $('.Header-search')
 
 let theme = $('.Root').css('#--themeCycle');
 $('.Header-themes').click(({ }) => {
-  $('.Root').toggleClass('is-dark').css('--themeCycle', `${ ++theme }`);
+  $('.Root').toggleClass('is-dark');//.css('--themeCycle', `${ ++theme }`);
 });
 
 $('.Catalog-root section').click(({ }) => {
-  $('.Article').addClass('is-enabled').addClass('is-visible');
+  $('.Article').addClass('is-visible');
+  //$('.Article').addClass('is-enabled').addClass('is-visible');
 });
 
 $('.Article-close').click(({ }) => {
+  $('.Article').removeClass('is-visible');
+  /*
   // TODO: Use transition duration from CSS
   $('.Article').one('transitionend', ({ }) => {
     let self = $('.Article');          //let c=0;
@@ -170,5 +177,5 @@ $('.Article-close').click(({ }) => {
         clearInterval(timer);         //console.log(c);
       }                               //else c++;
     }, 230);
-  }).removeClass('is-visible');
+  }).removeClass('is-visible');  */
 });

@@ -35,16 +35,25 @@
       }
       
       article img {
-        max-width: 300px;
+        width: 300px;
         float: right;
-        margin: 20px;
+        margin: 15px;
       }
     </style>
     
   </head>
   <body class="Root u-buttons">
     <aside class="Config u-scrollbar">
+      <button type="button" title="Close" class="Config-close"></button>
+      
       <form class="Config-body u-values">
+        <fieldset class="Config-sharing">
+          <legend>Sharing</legend>
+          <input type="button" title="RSS" class="Config-rss">
+          <input type="button" title="Facebook" class="Config-fb">
+          <input type="button" title="Twitter" class="Config-tw">
+        </fieldset>
+        
         <fieldset class="Config-categories">
           <legend>Categories</legend>
           <button type="button">Everything</button>
@@ -97,8 +106,11 @@
       <header class="Header">
         <form class="Header-root">
           <h1 title="Open settings" class="Header-logo">Wews</h1>
-          <input type="search" autofocus placeholder="search..." class="Header-search">
-          <input type="checkbox" title="Switch theme" class="Header-themes">
+          <input type="search" autofocus placeholder="search…" class="Header-search">
+          <fieldset class="Header-tools">
+            <input type="button" title="Account" class="Header-account">
+            <input type="checkbox" title="Switch theme" class="Header-themes">
+          </fieldset>
         </form>
       </header>
       
