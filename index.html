@@ -2,13 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width,height=device-height,minimum-scale=1,maximum-scale=1,initial-scale=1" />
+    <meta name="HandheldFriendly" content="true">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
     <meta name="application-name" content="Wews" />
     <meta name="author" content="denim2x" />
     <meta name="description" content="The friendly news aggregator" />
-    <meta name="abstract" content="A friendly news aggregator web app" />
+    <meta name="abstract" content="A refreshing news aggregator app for the modern Web" />
     
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js" as="script" />
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.core.min.js" as="script" />
@@ -44,71 +45,78 @@
   </head>
   <body class="Root u-buttons">
     <aside class="Config u-scrollbar">
-      <button type="button" title="Close" class="Config-close"></button>
-      
-      <form class="Config-body u-values">
-        <fieldset class="Config-sharing">
-          <legend>Sharing</legend>
-          <input type="button" title="RSS" class="Config-rss">
-          <input type="button" title="Facebook" class="Config-fb">
-          <input type="button" title="Twitter" class="Config-tw">
-        </fieldset>
+      <div class="Config-tools">
+        <button type="button" title="Close" class="Config-close"></button>
+        <button type="button" title="Account" class="Config-account"></button>
+      </div>
         
-        <fieldset class="Config-categories">
-          <legend>Categories</legend>
-          <button type="button">Everything</button>
-          <button type="button">Sports</button>
-          <button type="button">Politics</button>
-          <button type="button">World</button>
-          <button type="button">Weather</button>
-          <button type="button">Technology</button>
-          <button type="button">Entertainment</button>
-        </fieldset>
-        
-        <fieldset class="Config-ordering">
-          <legend>Sort by</legend>
-          <input type="radio" name="order" value="Relevance">
-          <input type="radio" name="order" value="Trending">
-          <input type="radio" name="order" value="Latest">
-        </fieldset>
-        
-        <fieldset name="Config-interval">
-          <legend>Interval</legend>
-          <input type="radio" name="timespan" value="Last day">
-          <input type="radio" name="timespan" value="Last week">
-          <input type="radio" name="timespan" value="Last month">
-          <input type="radio" name="timespan" value="Last three months">
-          <input type="radio" name="timespan" value="Last year">
-          <input type="radio" name="timespan" value="Last five years">
-          <input type="radio" name="timespan" value="All time">
-        </fieldset>
-        
-        <fieldset name="Config-sources">
-          <legend>Sources</legend>
-          <input type="checkbox" value="BBC">
-          <input type="checkbox" value="Yahoo">
-          <input type="checkbox" value="Google">
-          <input type="checkbox" value="Bing">
-          <input type="checkbox" value="NBC">
-          <input type="checkbox" value="MSN">
-          <input type="checkbox" value="Engadget">
-          <input type="checkbox" value="The Verge">
-          <input type="checkbox" value="CNET">
-          <input type="checkbox" value="TechCrunch">
-          <input type="checkbox" value="TechRadar">
-          <input type="checkbox" value="Wired">
-          <input type="checkbox" value="Express">
-        </fieldset>
-      </form>
+      <div class="Config-body u-center">
+        <form class="Config-main u-values">
+          <fieldset class="Config-sharing">
+            <legend>Sharing</legend>
+            <button type="button" title="RSS" class="Config-rss"></button>
+            <button type="button" title="Facebook" class="Config-fb"></button>
+            <button type="button" title="Twitter" class="Config-tw"></button>
+          </fieldset>
+          
+          <fieldset class="Config-categories">
+            <legend>Categories</legend>
+            <button type="button">Everything</button>
+            <button type="button">Sports</button>
+            <button type="button">Politics</button>
+            <button type="button">World</button>
+            <button type="button">Weather</button>
+            <button type="button">Technology</button>
+            <button type="button">Entertainment</button>
+          </fieldset>
+          
+          <fieldset class="Config-ordering">
+            <legend>Sort by</legend>
+            <input type="radio" name="order" value="Relevance">
+            <input type="radio" name="order" value="Trending">
+            <input type="radio" name="order" value="Latest">
+          </fieldset>
+          
+          <fieldset name="Config-interval">
+            <legend>Interval</legend>
+            <input type="radio" name="timespan" value="Last day">
+            <input type="radio" name="timespan" value="Last week">
+            <input type="radio" name="timespan" value="Last month">
+            <input type="radio" name="timespan" value="Last three months">
+            <input type="radio" name="timespan" value="Last year">
+            <input type="radio" name="timespan" value="Last five years">
+            <input type="radio" name="timespan" value="All time">
+          </fieldset>
+          
+          <fieldset name="Config-sources">
+            <legend>Sources</legend>
+            <input type="checkbox" value="BBC">
+            <input type="checkbox" value="Yahoo">
+            <input type="checkbox" value="Google">
+            <input type="checkbox" value="Bing">
+            <input type="checkbox" value="NBC">
+            <input type="checkbox" value="MSN">
+            <input type="checkbox" value="Engadget">
+            <input type="checkbox" value="The Verge">
+            <input type="checkbox" value="CNET">
+            <input type="checkbox" value="TechCrunch">
+            <input type="checkbox" value="TechRadar">
+            <input type="checkbox" value="Wired">
+            <input type="checkbox" value="Express">
+          </fieldset>
+        </form>
+      </div>
     </aside>
     
     <div class="Root-body">
       <header class="Header">
-        <form class="Header-root">
-          <h1 title="Open settings" class="Header-logo">Wews</h1>
+        <h1 title="Open settings" class="Header-logo">
+          <span class="Header-title">Wews</span>
+        </h1>
+        <form class="Header-body">
           <input type="search" autofocus placeholder="search…" class="Header-search">
           <fieldset class="Header-tools">
-            <input type="button" title="Account" class="Header-account">
+            <button type="button" title="Account" class="Header-account"></button>
             <input type="checkbox" title="Switch theme" class="Header-themes">
           </fieldset>
         </form>
@@ -159,7 +167,7 @@
         <div class="Article-root">
           <button type="button" title="Close" class="Article-close"></button>
           <section class="Article-body">
-            <img src="https://goo.gl/usHM9M">
+            <img src="https://goo.gl/usHM9M" alt="Sample image">
             <p>Aliquam nec neque nec orci aliquet tempor. Maecenas et varius ipsum. Suspendisse eu justo dui. Phasellus quam magna, sagittis ac tincidunt quis, pulvinar at purus. In molestie suscipit libero luctus convallis. Donec rhoncus, nisi ac imperdiet eleifend, urna nulla malesuada nunc, quis aliquet neque lectus eget est. Donec quis semper turpis, sagittis eleifend ipsum. Vestibulum tristique, enim nec convallis pharetra, neque velit tincidunt velit, vel facilisis quam metus id mauris. Nullam sit amet ligula eleifend, bibendum neque quis, egestas sem. Mauris consectetur ante a pretium eleifend. Vivamus at ultricies ex. Curabitur dui ex, bibendum ac nunc nec, scelerisque pretium tortor. Pellentesque ac pharetra ipsum. Aliquam et nisl lobortis, porta augue vitae, finibus purus.</p>
             <p>Quisque velit elit, varius eu luctus sit amet, pretium at ligula. Nulla euismod lobortis felis eget laoreet. Aliquam erat volutpat. Aenean auctor metus tincidunt dignissim venenatis. Aliquam nec pellentesque nisi. Suspendisse potenti. Aenean hendrerit eu ipsum nec maximus. Sed nec urna nec mauris viverra fermentum. Pellentesque quis metus ac lectus faucibus iaculis ut eget tellus.</p>
             <p>Donec venenatis nisl sit amet dui sollicitudin, nec iaculis nisi aliquam. Duis eu dapibus magna. Proin ultrices in tortor vel mattis. Nullam gravida hendrerit cursus. Phasellus efficitur nisi ut lacus bibendum commodo. Quisque aliquet viverra velit quis gravida. Aenean vel pharetra nisl. Aenean et porttitor erat. Integer dictum euismod euismod. Donec vulputate vehicula justo vitae pharetra.</p>

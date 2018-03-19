@@ -4,7 +4,12 @@
  * @author denim2x <cristian.tudorache91@hotmail.com>
  * @license MIT
  **/
- 
+
+/**
+ * TODO: Implement zooming feature - desktop & mobile (locked in `index.html`
+ * - 'viewport' meta tag)
+ **/
+
 /* global $ _ */
 'use strict';
 
