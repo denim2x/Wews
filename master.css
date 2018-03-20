@@ -350,7 +350,7 @@ input[type="button"] {
 
 .Config-main [value] {
   padding: 5px 6px 0 6px;
-  text-align: center;
+  text-align: left;
 }
 
 .Config-sharing {
