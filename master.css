@@ -745,31 +745,6 @@ input[type="button"] {
   pointer-events: auto;
 }
 
-.Article-close {
-  transition:
-    opacity 0.2s ease-in;
-    
-  opacity: 0.30;
-    
-  width: 23px;
-  height: 23px;
-  z-index: 1;
-  position: sticky;
-  margin: var(--Article-padding) 0.5em;
-  float: right;
-  top: calc(var(--Article-padding));
-  right: 0.5em;
-  background: no-repeat url("https://image.flaticon.com/icons/svg/128/128531.svg");
-}
-
-.Article-close:hover {
-  opacity: 0.43;
-}
-
-.Article-close:active {
-  opacity: 0.53;
-}
-
 .Article-root {
   transition: 
     transform 0.3s ease-out;   /*
@@ -790,11 +765,48 @@ input[type="button"] {
   box-sizing: border-box;
   font-size: 1.08em;
   line-height: 1.5;
-  max-width: 850px;
   margin: 0 auto;
   display: block;
   /*min-width: var(--min-width);*/
+  
   min-width: 213px;
+  max-width: 850px;
+}
+
+.Article-close {
+  transition:
+    opacity 0.2s ease-in;
+    
+  opacity: 0.30;
+    
+  width: 23px;
+  height: 23px;
+  z-index: 1;
+  position: sticky;
+  /*padding: var(--Article-padding) 0.5em;*/
+  padding: 0;
+  float: right;
+  margin: 0;
+  margin-right: 0.5em;
+  top: calc(var(--Article-padding) * 3.4 + var(--Header-height));
+  /*right: calc(var(--Article-padding) + 0.5em);*/
+  right: 0.5em;
+  background: no-repeat url("https://image.flaticon.com/icons/svg/128/128531.svg");
+}
+/* FIXME: Workaround - find better solution */
+@media screen and (min-device-height: 768px) {
+  .Article-close {
+    top: calc(var(--Article-padding) * 1.1);
+    right: 0;
+  }
+}
+
+.Article-close:hover {
+  opacity: 0.43;
+}
+
+.Article-close:active {
+  opacity: 0.53;
 }
 
 .Article-body {
